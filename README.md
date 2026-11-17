@@ -10,14 +10,14 @@
 
 <p align="center">
   <a href="https://retro-chess.holy-c.men/"><img alt="Play in your browser" src="https://img.shields.io/badge/Play-in%20your%20browser-d9534f?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
-  <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Windows" src="https://img.shields.io/badge/Download-Windows-e8a33c?style=for-the-badge"></a>
+  <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Windows" src="https://img.shields.io/badge/Download-Windows-e8a33c?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0wIDMuNCA5LjggMnY5LjVIMHpNMTEgMS44IDI0IDB2MTEuNUgxMXpNMCAxMi41aDkuOFYyMkwwIDIwLjZ6TTExIDEyLjVoMTNWMjRsLTEzLTEuOHoiLz48L3N2Zz4%3D"></a>
   <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Android" src="https://img.shields.io/badge/Download-Android-3ddc84?style=for-the-badge&logo=android&logoColor=white"></a>
   <br>
   <img alt="Made with Godot" src="https://img.shields.io/badge/made%20with-Godot%204-478cbf?style=for-the-badge&logo=godotengine&logoColor=white">
 </p>
 
 <p align="center">
-  <img src="media/board.jpg" alt="A game of Retro Chess" width="900">
+  <img src="media/boards.gif" alt="Opening moves on six of the boards of Retro Chess" width="900">
 </p>
 
 ---
@@ -29,10 +29,11 @@
 - **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
 - **Animated armies:** every move is a walk, every capture a fight, with ranged pieces that shoot from afar.
+- **Look closer:** zoom and pan around the board, or hold the right mouse button and drag up to stand up and look down on it, so no piece hides behind another.
 - **Two players on one screen**, and up to five player profiles per device, each with its own progress and portrait.
 - **Classic pieces** if you prefer them: a hand-drawn Staunton set in the same style, with its own little animations.
 - **A real engine:** Stockfish runs inside the game, on every platform, including the browser version.
-- **English and French**, mouse, keyboard or touch, a frame-rate cap that saves battery, and in the browser a resolution choice (up to 1080p) and a performance mode for modest computers.
+- **English and French**, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser a resolution choice (540p to 2160p) and a performance mode for modest computers.
 
 ## 💾 Install
 
@@ -48,7 +49,10 @@ The Windows and Android versions check this page at launch. When a new version i
 on Windows the game downloads it, closes, installs it and starts again by itself; on Android the system installer
 opens with the new version. The check can be turned off in the settings.
 
-## 📜 Licence
+## 📜 Credits and licence
+
+Creatures, scenery, sounds and music: [Dofus Retro](https://www.dofus-retro.com/), © Ankama. Retro Chess is a free fan game, not affiliated with Ankama.
+
 
 Retro Chess uses [Stockfish 11](https://stockfishchess.org/) (GPLv3) for its opponents. The source code of the engine
 as built into the game (Windows, Android and WebAssembly) is attached to every release as
