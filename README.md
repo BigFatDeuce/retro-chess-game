@@ -25,12 +25,14 @@
 ## ✨ Features
 
 - **The Champions' Path:** ten opponents, one per board, from a beginner who barely knows the rules to a 1900 Elo master. Each Elo was measured against a calibrated engine.
-- **Free play:** once every champion is beaten, pick any strength from 400 to 2800 Elo on any board you have opened.
+- **Free play:** from the start, pick any board and any strength from 400 to 2800 Elo.
+- **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
 - **Animated armies:** every move is a walk, every capture a fight, with ranged pieces that shoot from afar.
 - **Two players on one screen**, and up to five player profiles per device, each with its own progress and portrait.
+- **Classic pieces** if you prefer them: a hand-drawn Staunton set in the same style, with its own little animations.
 - **A real engine:** Stockfish runs inside the game, on every platform, including the browser version.
-- **English and French**, mouse, keyboard or touch, and a frame-rate cap that saves battery.
+- **English and French**, mouse, keyboard or touch, a frame-rate cap that saves battery, and in the browser a resolution choice (up to 1080p) and a performance mode for modest computers.
 
 ## 💾 Install
 
