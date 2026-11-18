@@ -12,6 +12,9 @@ Per player (its moves while the game is still open, |value| <= 800 cp, judged by
     mat. perdu      per 100 moves: the move cost 200+ and the material balance fell by 200+ by the next reply
     tactique ratée  % of the positions where the best move won 150+ with a capture or a check, played elsewhere
                     losing 200+
+    gratuite ratée  % of the times the opponent's last move left a piece (knight and up) en prise, best taken, and it
+                    was not taken
+    données         pieces given away (left en prise + moved en prise, unjustified) per 40 moves (about a game)
     ouverture       ACPL over its first 10 moves; développés = minor pieces developed in the first 10 moves;
                     roque = share of games castled by move 15; dame tôt = queen moves in the first 8
 Strength: Elo from the scores between the players (maximum likelihood), anchored on --anchor.
@@ -63,6 +66,10 @@ def stats(games):
             if i + 1 < len(mv):
                 drop = m["mat"] - (-mv[i + 1]["mat"])  # balance after our move vs after their reply (our view)
                 s["matlost"] += loss >= 200 and drop >= 200
+            # a piece of the opponent's left en prise by its last move: taken or not
+            if i > 0 and mv[i - 1]["hanging"] >= 300 and m["best_tactic"]:
+                s["free_pos"] += 1
+                s["free_miss"] += m["gain"] < mv[i - 1]["hanging"]
             if m["best_tactic"] and before >= 150:
                 s["tac_pos"] += 1
                 s["tac_miss"] += loss >= 200
@@ -82,6 +89,7 @@ def stats(games):
             s["castled"] += castled[side]
             s["qearly"] += qearly[side]
             s["plies"] += len(mv)
+            s["own_moves"] += sum(1 for m in mv if m["by"] == who)
     return S
 
 
@@ -132,7 +140,8 @@ def main():
         return ({"old": 0, "new": 1, "uci": 2, "human": 3}[k], int(e))
     print(f"{len(games)} parties\n")
     hdr = ("joueur", "Elo mes.", "ACPL", "gaffes%", "erreurs%", "en prise", "sacrif.", "dame", "mat.perdu",
-           "tact.ratée%", "ouv.ACPL", "dévelop.", "roque%", "dame tôt", "coups/partie")
+           "tact.ratée%", "gratuite ratée%", "données/40 coups", "ouv.ACPL", "dévelop.", "roque%", "dame tôt",
+           "coups/partie")
     print(" | ".join(hdr))
     for p in sorted(S, key=key):
         s = S[p]
@@ -142,6 +151,8 @@ def main():
             f"{100 * s['mistake'] / n:.1f}", f"{100 * s['hung'] / n:.1f}", f"{100 * s['sac'] / n:.1f}",
             f"{100 * s['queen'] / n:.1f}", f"{100 * s['matlost'] / n:.1f}",
             f"{100 * s['tac_miss'] / max(1, s['tac_pos']):.0f}",
+            f"{100 * s['free_miss'] / max(1, s['free_pos']):.0f}",
+            f"{40 * (s['hung'] + s['sac']) / n:.2f}",
             f"{s['open_loss'] / max(1, s['open_moves']):.0f}", f"{s['dev'] / s['games']:.1f}",
             f"{100 * s['castled'] / s['games']:.0f}", f"{s['qearly'] / s['games']:.1f}",
             f"{s['plies'] / s['games'] / 2:.0f}"]))

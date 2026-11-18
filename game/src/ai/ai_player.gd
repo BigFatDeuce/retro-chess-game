@@ -2,7 +2,7 @@ class_name AiPlayer
 extends Node
 ## An opponent driven by the embedded engine (StockfishEngine GDExtension, UCI in memory).
 ## A level is a dictionary from data/opponents.json:
-##   human (a Lichess rapid rating): plays like a person of that strength (HumanMind, docs/HUMAN_AI.md), with an
+##   human (an Elo below 1350, UCI_Elo's scale): a human-like player of that strength (HumanMind, docs/HUMAN_AI.md), with an
 ##     optional style {"aggression": 0..1};
 ##   or the engine's own settings: skill (0-20), depth or movetime, uci_elo (UCI_LimitStrength, >= 1350).
 

@@ -26,7 +26,7 @@ func _run() -> void:
 	await process_frame
 	var pos := ChessPosition.new()
 	var moves := PackedStringArray()
-	var levels := [{"human": 600, "style": {"greed": 1.4}}, {"human": 1800, "style": {"aggression": 0.8}}]
+	var levels := [{"human": 600, "style": {"greed": 1.4}}, {"uci_elo": 1750, "movetime": 400}]
 	var ms := [0, 0]
 	var fails := 0
 	# a cancel mid-search: the next answer must still come, for the right position
@@ -51,6 +51,6 @@ func _run() -> void:
 		moves.append(u)
 		pos.make_move(m)
 	print("coups : ", " ".join(moves))
-	print("temps moyen : 600 = %d ms, 1800 = %d ms" % [ms[0] / maxi(1, (moves.size() + 1) / 2), ms[1] / maxi(1, moves.size() / 2)])
+	print("temps moyen : 600 = %d ms, Stockfish 1750 = %d ms" % [ms[0] / maxi(1, (moves.size() + 1) / 2), ms[1] / maxi(1, moves.size() / 2)])
 	print("OK" if fails == 0 and moves.size() >= 20 else "ÉCHEC")
 	quit()

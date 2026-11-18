@@ -5,7 +5,7 @@
 <p align="center">
   <b>Chess, with living pieces.</b><br>
   Every piece is a creature that walks, fights and falls on illustrated boards,<br>
-  against ten champions from 450 to 2000 Elo who play like real people.
+  against ten champions from 600 to 2000 Elo.
 </p>
 
 <p align="center">
@@ -28,9 +28,9 @@
 
 ## ✨ Features
 
-- **The Champions' Path:** ten opponents, one per board, from a beginner who barely knows the rules to a 2000 Elo master, each with a character of their own.
-- **Opponents that play like people:** they don't play random moves to be weak. Like real players of their rating, they leave a piece en prise or miss a fork, and they make fewer mistakes as the rating rises. Their mistakes were tuned on real games from the Lichess database ([how it works](docs/HUMAN_AI.md)).
-- **Free play:** from the start, pick any board and any strength from 400 to 2800 Elo.
+- **The Champions' Path:** ten opponents, one per board, from a 600 Elo beginner to a 2000 Elo master, each with a character of their own.
+- **Opponents that look at the board:** the weak champions don't play random moves. They take a piece you leave and rarely give theirs away; they lose on plans, placement and tactics two moves deep. From 1350 Elo, Stockfish's own limited-strength mode takes over ([how it works](docs/HUMAN_AI.md)).
+- **Free play:** from the start, pick any board and any strength from 600 to 2800 Elo.
 - **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
 - **Animated armies:** every move is a walk, every capture a fight, with ranged pieces that shoot from afar.
@@ -72,8 +72,8 @@ stands on: **[CREDITS.md](CREDITS.md)**.
 
 - Creatures, scenery, sounds and music: [Dofus Retro](https://www.dofus-retro.com/), © Ankama. They are not covered by
   this repository's licence.
-- Opponents: [Stockfish 11](https://stockfishchess.org/) (GPLv3), tuned on the [Lichess](https://lichess.org/) open
-  database.
+- Opponents: [Stockfish 11](https://stockfishchess.org/) (GPLv3), with the [Lichess](https://lichess.org/) open database as
+  a reference.
 - Made with [Godot Engine](https://godotengine.org/) (MIT).
 
 The game's own code is under the **MIT licence**: reuse it freely, crediting "Retro Chess by BigFatDeuce" with a link

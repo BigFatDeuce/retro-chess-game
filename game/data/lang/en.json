@@ -246,11 +246,11 @@
         "Retro Chess est un jeu de fan gratuit, fait par passion, sans aucun but commercial, et non affilié à Ankama.": "Retro Chess is a free fan game, made for the love of it, with no commercial aim, and not affiliated with Ankama.",
         "Les créatures, les décors, les sons et les musiques viennent de Dofus Retro. Merci à Ankama et à ses artistes pour ce monde qui nous accompagne depuis des années.": "The creatures, scenery, sounds and music come from Dofus Retro. Thank you to Ankama and its artists for a world that has been with us for years.",
         "Le moteur d'échecs libre (GPLv3) qui calcule les coups des adversaires. Merci à ses nombreux contributeurs.": "The free chess engine (GPLv3) that computes the opponents' moves. Thank you to its many contributors.",
-        "Sa base de parties ouverte (domaine public) a servi à faire jouer les adversaires comme de vrais joueurs de leur niveau. Merci pour ce site libre et gratuit.": "Its open game database (public domain) taught the opponents to play like real players of their level. Thank you for this free and open site.",
         "Le moteur de jeu libre (MIT) avec lequel Retro Chess est fait.": "The free game engine (MIT) Retro Chess is made with.",
         "Les polices du jeu (SIL Open Font License).": "The game's fonts (SIL Open Font License).",
         "Le code du jeu est ouvert : réutilisable librement en citant ses auteurs.": "The game's code is open: free to reuse, crediting its authors.",
         "Visiter": "Visit",
-        "Fredoka et Nunito": "Fredoka and Nunito"
+        "Fredoka et Nunito": "Fredoka and Nunito",
+        "Sa base de parties ouverte (domaine public) a servi de référence pour régler les erreurs des adversaires. Merci pour ce site libre et gratuit.": "Its open game database (public domain) was the reference used to tune the opponents' mistakes. Thank you for this free and open site."
     }
 }

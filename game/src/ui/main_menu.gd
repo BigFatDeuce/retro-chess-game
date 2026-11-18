@@ -1338,7 +1338,7 @@ func _build_profile_edit() -> void:
 const CREDITS := [
 	["Dofus Retro, © Ankama", "Les créatures, les décors, les sons et les musiques viennent de Dofus Retro. Merci à Ankama et à ses artistes pour ce monde qui nous accompagne depuis des années.", "https://www.dofus-retro.com/"],
 	["Stockfish", "Le moteur d'échecs libre (GPLv3) qui calcule les coups des adversaires. Merci à ses nombreux contributeurs.", "https://stockfishchess.org/"],
-	["Lichess", "Sa base de parties ouverte (domaine public) a servi à faire jouer les adversaires comme de vrais joueurs de leur niveau. Merci pour ce site libre et gratuit.", "https://database.lichess.org/"],
+	["Lichess", "Sa base de parties ouverte (domaine public) a servi de référence pour régler les erreurs des adversaires. Merci pour ce site libre et gratuit.", "https://database.lichess.org/"],
 	["Godot Engine", "Le moteur de jeu libre (MIT) avec lequel Retro Chess est fait.", "https://godotengine.org/"],
 	["Fredoka et Nunito", "Les polices du jeu (SIL Open Font License).", "https://fonts.google.com/"],
 	["Retro Chess", "Le code du jeu est ouvert : réutilisable librement en citant ses auteurs.", "https://github.com/BigFatDeuce/retro-chess-game"],
