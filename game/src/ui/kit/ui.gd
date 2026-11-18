@@ -299,3 +299,54 @@ static func toast(host: Control, text: String, icon_name := "", hold := 1.6, col
 
 ## Helper node: Esc / B closes the dialog it belongs to.
 const _EscCatcher := preload("res://src/ui/kit/esc_catcher.gd")
+
+
+## The three sets of chess pieces as buttons (each with its two kings), the chosen one held down; picking one sets
+## Settings "piece_set" and then calls `on_pick` (the set's key). `king_px`: the kings' height; without `names`,
+## the kings alone (the names in the tooltips).
+static func piece_set_picker(king_px := 64.0, on_pick := Callable(), names := true) -> HBoxContainer:
+	var h := hbox(Pal.S2)
+	var g := ButtonGroup.new()
+	for s in [["", "Créatures"], ["classic", "Bonta / Brâkmar"], ["staunton", "Classiques"]]:
+		var key: String = s[0]
+		var b := FxButton.make("", "ChipButton")
+		b.toggle_mode = true
+		b.button_group = g
+		b.button_pressed = String(Settings.get_value("piece_set")) == key
+		b.tooltip_text = Lang.t(s[1])
+		var v := vbox(Pal.S1, BoxContainer.ALIGNMENT_CENTER)
+		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var kings := hbox(0, BoxContainer.ALIGNMENT_CENTER)
+		kings.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		for side in ["white", "black"]:
+			var t := TextureRect.new()
+			t.texture = _king_texture(key, side)
+			t.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			t.custom_minimum_size = Vector2(king_px * 0.62, king_px)
+			t.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			kings.add_child(t)
+		v.add_child(kings)
+		if names:
+			var l := label(s[1], "", Pal.FS_SMALL - 6)
+			l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			v.add_child(l)
+		b.hold(v)
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.pressed.connect(func() -> void:
+			Settings.set_value("piece_set", key)
+			if on_pick.is_valid():
+				on_pick.call(key))
+		h.add_child(b)
+	return h
+
+
+## A set's king, for the picker: the creature's portrait, or the still piece's own picture.
+static func _king_texture(set_key: String, side: String) -> Texture2D:
+	var paths: Array = ["res://assets/gen/portraits/%s_king.png" % side]
+	if set_key != "":
+		paths = ["res://assets/gen/%s_1x/%s_king_0.png" % [set_key, side], "res://assets/gen/%s/%s_king_0.png" % [set_key, side]]
+	for p in paths:
+		if ResourceLoader.exists(p):
+			return load(p)
+	return null

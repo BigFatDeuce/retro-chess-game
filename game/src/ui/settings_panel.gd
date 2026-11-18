@@ -95,7 +95,7 @@ func _show(tab: String) -> void:
 			if Updater.supported():
 				_switch("check_updates", "refresh", Lang.f("Chercher les mises à jour au lancement (version %s)", [Updater.version()]))
 			_choice("anim_speed", "hourglass", "Vitesse des créatures", [[0.75, "Lente"], [1.0, "Normale"], [1.5, "Rapide"]])
-			_switch("classic_pieces", "pawn", "Pièces Bonta contre Brâkmar (au lieu des créatures)")
+			_row("pawn", "Pièces", Ui.piece_set_picker(54.0))
 			_switch("see_through", "eye", Lang.t("Pièces cachées en transparence") + ("" if Pal.touch() else "  (F1)"))
 			_switch("ambient_life", "leaf", "Vie autour du plateau (créatures, papillons)")
 		"display":

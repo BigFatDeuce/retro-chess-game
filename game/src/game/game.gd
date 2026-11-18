@@ -23,7 +23,7 @@ var remote := false  ## the other side is a player at a distance: its moves come
 var level: Dictionary = {}
 var board_key := "prairie"
 var pieces_def: Dictionary = {}
-## Every classic piece fights the same way: it hops up to its victim and knocks it over (tools/build_classic.py).
+## Every still piece (classic or staunton set) fights the same way: it hops up to its victim and knocks it over (tools/build_classic.py).
 const CLASSIC_DEF := {"attacks": {"melee": {"anim": "anim0"}}, "highlight": "anim1"}
 var busy := false  ## a move is being staged
 var over := false
@@ -77,7 +77,7 @@ func _ready() -> void:
 	add_child(camera)
 	board.view_changed.connect(func() -> void: _view_dirty = true)
 	Glove.game = self
-	Atlas.classic = bool(Settings.get_value("classic_pieces"))
+	Atlas.piece_set = String(Settings.get_value("piece_set"))  # set by Settings too; tests change the values directly
 	for k in ["anim_speed", "see_through", "ambient_life"]:
 		_on_setting(k)
 
@@ -178,8 +178,7 @@ func _on_setting(key: String) -> void:
 			choreo.speed = float(Settings.get_value("anim_speed"))
 		"see_through":
 			set_see_through(bool(Settings.get_value("see_through")))
-		"classic_pieces":
-			Atlas.classic = bool(Settings.get_value("classic_pieces"))
+		"piece_set":
 			# never in the middle of a move: the staging holds the pieces it moves
 			while busy and is_inside_tree():
 				await get_tree().process_frame
@@ -251,7 +250,7 @@ func _make_piece(p: int, sq: int) -> Piece:
 	var role: String = PIECE_ROLES[ChessPosition.piece_type(p)]
 	var node := Piece.new()
 	node.home_right = (side == "white") != board.flipped
-	node.setup(side, role, CLASSIC_DEF if Atlas.classic else pieces_def["sides"][side][role])
+	node.setup(side, role, CLASSIC_DEF if Atlas.still_pieces() else pieces_def["sides"][side][role])
 	layer.add_child(node)
 	choreo.place_on(node, sq)
 	return node

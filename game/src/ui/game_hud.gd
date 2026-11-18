@@ -78,7 +78,7 @@ func setup(p_game: ChessGame, _a := "", _b := "") -> void:
 	hh.add_child(hi)
 	hh.add_child(Ui.label("Coups joués", "Ink", Pal.FS_SMALL + 2))
 	_history_scroll = ScrollContainer.new()
-	_history_scroll.custom_minimum_size = Vector2(0, 340)
+	_history_scroll.custom_minimum_size = Vector2(0, HISTORY_H)
 	_history_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	hv.add_child(_history_scroll)
 	_history_list = Ui.vbox(2)
@@ -155,49 +155,52 @@ func _relayout() -> void:
 	_history_panel.visible = _wide and bool(_history_panel.get_meta("open", true))
 
 
-var _tip: PanelContainer  ## the first boards: "not fond of the monsters?" with the classic pieces' switch
+const HISTORY_H := 340.0  ## the moves list's height (it scrolls); shorter while the note of the first boards shows
+const HISTORY_H_TIP := 60.0
+var _tip: PanelContainer  ## the first boards: "not fond of the monsters?" with the three sets of pieces
 
 
-## The first boards of the ladder: a small note at the top right offering the classic pieces instead of the
-## creatures (a switch, a cross to close it). Once the switch is used, the note is never shown again.
-func pieces_tip(show: bool) -> void:
+func _close_tip() -> void:
 	if _tip and is_instance_valid(_tip):
 		_tip.queue_free()
-		_tip = null
+	_tip = null
+	_history_scroll.custom_minimum_size.y = HISTORY_H
+
+
+## The first boards of the ladder: a small note at the top right offering the other sets of pieces instead of the
+## creatures (three buttons, a cross to close it). Once a set is picked there, the note is never shown again.
+func pieces_tip(show: bool) -> void:
+	_close_tip()
 	if not show or not bool(Settings.get_value("pieces_tip")):
 		return
 	_tip = Ui.panel("Plate")
-	_tip.custom_minimum_size = Vector2(420, 0)
+	_tip.custom_minimum_size = Vector2(0, 0)
 	_right.add_child(_tip)
 	_right.move_child(_tip, 1)  # under the action buttons
+	var v := Ui.vbox(Pal.S1)
+	_tip.add_child(v)
 	var h := Ui.hbox(Pal.S2)
-	_tip.add_child(h)
-	var txt := Ui.label("Pas fan des monstres ? Joue avec les pièces Bonta contre Brâkmar.", "", Pal.FS_SMALL - 2)
+	v.add_child(h)
+	var txt := Ui.label("Pas fan des monstres ? Choisis tes pièces :", "", Pal.FS_SMALL - 4)
 	txt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	txt.custom_minimum_size = Vector2(260, 0)  # a fixed width: the column stays as wide as the history
+	txt.custom_minimum_size = Vector2(280, 0)  # a fixed width: the column stays as wide as the history
 	txt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(txt)
-	var sw := CheckButton.new()
-	sw.focus_mode = Control.FOCUS_NONE
-	sw.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	sw.button_pressed = bool(Settings.get_value("classic_pieces"))
-	sw.tooltip_text = Lang.t("Pièces Bonta contre Brâkmar (au lieu des créatures)")
-	sw.toggled.connect(func(on: bool) -> void:
-		Audio.play("ui.click")
-		Settings.set_value("pieces_tip", false)  # the player knows where it is now: not shown again
-		Settings.set_value("classic_pieces", on))
-	h.add_child(sw)
+	var picker := Ui.piece_set_picker(48.0, func(_key: String) -> void:
+		Settings.set_value("pieces_tip", false), false)  # the player knows where it is now: not shown again
+	for b in picker.get_children():
+		b.focus_mode = Control.FOCUS_NONE
+	v.add_child(picker)
 	var x := FxButton.make("", "IconButton", "close", Vector2(56, 56))
 	x.focus_mode = Control.FOCUS_NONE
 	x.tooltip_text = Lang.t("Fermer")
 	x.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	x.pressed.connect(func() -> void:
 		Audio.play("ui.click")
-		if _tip and is_instance_valid(_tip):
-			_tip.queue_free()
-			_tip = null
-			_relayout.call_deferred())
+		_close_tip()
+		_relayout.call_deferred())
 	h.add_child(x)
+	_history_scroll.custom_minimum_size.y = HISTORY_H_TIP  # the note's room, so the column stays off the board
 	_relayout.call_deferred()
 	get_tree().process_frame.connect(_relayout, CONNECT_ONE_SHOT)  # once the wrapped text has its height
 	Ui.pop_in(_tip, 0.6, 0.9)

@@ -1,9 +1,11 @@
-"""Bakes the classic chess set (Settings "classic_pieces"): Bonta against Brâkmar. White is Bonta (angels: ivory,
+"""Bakes the still-picture chess sets (Settings "piece_set"): "classic", Bonta against Brâkmar, and "staunton",
+plain ivory and ebony Staunton pieces. For "classic": White is Bonta (angels: ivory,
 sky blue, gold, feathered wings), black is Brâkmar (demons: charcoal, crimson, bat wings, horns).
 
-    python tools/build_classic.py [--preview out.png]      (with the python that has skia, like loading_runners.py)
-    -> game/assets/gen/classic/<side>_<role>.json + .png      (density 1.5, sharp up to 4K)
-       game/assets/gen/classic_1x/<side>_<role>.json + .png   (density 1.0)
+    python tools/build_classic.py [--set classic|staunton|all] [--preview out.png]
+        (with the python that has skia, like loading_runners.py)
+    -> game/assets/gen/<set>/<side>_<role>.json + .png      (density 1.5, sharp up to 4K)
+       game/assets/gen/<set>_1x/<side>_<role>.json + .png   (density 1.0)
 
 The pictures come from one painted sheet, tools/art/classic_set.webp (transparent background, white row on top,
 black row below, king queen rook bishop knight pawn from left to right). Touched up here:
@@ -11,6 +13,9 @@ black row below, king queen rook bishop knight pawn from left to right). Touched
       the demons) instead of the sheet's own marks;
     - Brâkmar's king and queen wear gold crowns, like Bonta's;
     - Brâkmar's queen has a demon's horns, so she does not look like her king.
+
+"staunton" comes from tools/art/staunton_set.webp, same layout on a plain green background (keyed out here), used
+as it is: its proportions are already a real set's, scaled so its king stands as tall as the classic one.
 
 The pieces are still pictures: their animations (breathing, hop, lunge, hit, fall, cheer) are transforms of that
 one picture, written into the atlas frames ("t": [degrees, scale x, scale y, dx, dy] around the feet, see
@@ -34,10 +39,14 @@ SHEET = ROOT / "tools" / "art" / "classic_set.webp"
 FPS = 60.0
 SIDES = ("white", "black")
 ROLES = ("king", "queen", "rook", "bishop", "knight", "pawn")
-LAYOUT = 0.5      # layout px per sheet px: the king stands ~205 layout px tall, like the creatures' tallest
+LAYOUT = 0.5      # layout px per sheet px ("classic"; "staunton" is matched to its king): the king stands ~205 layout px tall, like the creatures' tallest
 # like a real set: the king the biggest (taller and broader), the queen next (taller); (width, height) factors
 ROLE_SCALE = {"king": (1.2, 1.14), "queen": (1.04, 1.12)}
 FOOT_K = 0.3      # the base's bottom ellipse: its half height over its half width, on the sheet's own view
+SETS = {
+    "classic": {"sheet": "classic_set.webp", "foot_k": 0.3},
+    "staunton": {"sheet": "staunton_set.webp", "foot_k": 0.22, "key_green": True, "role_scale": {}},
+}
 OUTLINE = (24, 16, 20)
 GOLD = [(0.0, (70, 46, 14)), (0.25, (148, 86, 18)), (0.5, (211, 141, 39)), (0.75, (238, 176, 53)),
         (1.0, (255, 230, 140))]
@@ -62,10 +71,10 @@ def _boxes(alpha: np.ndarray) -> dict:
     """(side, role) -> (x0, y0, x1, y1) of every piece on the sheet."""
     on = alpha > 8
     out = {}
-    rows = _runs(on.any(1))
+    rows = [r for r in _runs(on.any(1)) if r[1] - r[0] > 12]  # specks of the background ignored
     assert len(rows) == 2, rows
     for side, (y0, y1) in zip(SIDES, rows):
-        cols = _runs(on[y0:y1].any(0))
+        cols = [c for c in _runs(on[y0:y1].any(0)) if c[1] - c[0] > 12]
         assert len(cols) == 6, cols
         for role, (x0, x1) in zip(ROLES, cols):
             ys = np.nonzero(on[y0:y1, x0:x1].any(1))[0]
@@ -347,9 +356,29 @@ def _queen_horns(a: np.ndarray, box):
     a[y0 - pad:y1 + pad, x0 - pad:x1 + pad] = region
 
 
+def _key_green(a: np.ndarray):
+    """A plain green background made transparent; the soft edges lose their green (unmixed from it)."""
+    rgb = a[..., :3]
+    green = rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2])
+    border = np.concatenate([green[:4].ravel(), green[-4:].ravel(), green[:, :4].ravel(), green[:, -4:].ravel()])
+    g0 = float(np.median(border))
+    edge = np.concatenate([rgb[:4].reshape(-1, 3), rgb[-4:].reshape(-1, 3)])
+    bg = np.median(edge, 0)
+    al = np.clip(1 - (green - 4) / (g0 - 10), 0, 1)
+    al[al < 0.04] = 0
+    al[al > 0.96] = 1
+    with np.errstate(divide="ignore", invalid="ignore"):
+        un = (rgb - (1 - al[..., None]) * bg) / al[..., None]
+    a[..., :3] = np.where(al[..., None] > 0, np.clip(un, 0, 255), 0)
+    a[..., 3] = al * 255
+
+
 def load_sheet():
     """The touched-up sheet (float RGBA) and every piece's box on it."""
     a = np.array(Image.open(SHEET).convert("RGBA")).astype(float)
+    if CFG.get("key_green"):
+        _key_green(a)
+        return a, _boxes(a[..., 3])
     a[..., 3] = np.where(a[..., 3] >= 250, 255, a[..., 3])
     boxes = _boxes(a[..., 3])
     _emblems(a, boxes)
@@ -369,7 +398,7 @@ def render(sheet, boxes, side: str, role: str, density: float):
     # premultiplied for the resize (no dark fringes), then back
     pm = crop.copy()
     pm[..., :3] *= al[..., None] / 255.0
-    sx, sy = ROLE_SCALE.get(role, (1.0, 1.0))
+    sx, sy = CFG.get("role_scale", ROLE_SCALE).get(role, (1.0, 1.0))
     kx, ky = LAYOUT * density * sx, LAYOUT * density * sy
     w, h = round(pm.shape[1] * kx), round(pm.shape[0] * ky)
     chans = [np.array(Image.fromarray(pm[..., c].astype(np.float32), "F").resize((w, h), Image.LANCZOS))
@@ -385,7 +414,7 @@ def render(sheet, boxes, side: str, role: str, density: float):
     xs = np.nonzero(low.any(0))[0]
     rx = (xs[-1] - xs[0]) / 2
     fx = (xs[0] + xs[-1]) / 2
-    fy = rows[-1] - FOOT_K * rx
+    fy = rows[-1] - CFG.get("foot_k", FOOT_K) * rx
     return img, (fx * kx, fy * ky), rx * LAYOUT * sx
 
 
@@ -500,7 +529,8 @@ def bake(sheet, boxes, density: float, folder: str, preview: list | None = None)
             if preview is not None:
                 preview.append((key, img, oy))
             fr = {"p": 0, "r": [0, 0, img.width, img.height], "o": [round(ox, 2), round(oy, 2)]}
-            data = {"density": density, "fps": FPS, "pages": [f"{key}_0.png"], "classic": True, "anims": {}}
+            data = {"density": density, "fps": FPS, "pages": [f"{key}_0.png"], "classic": True, "set": SET,
+                    "anims": {}}
             for name, (frames, events, loop) in anims(role, oy / density, base_r).items():
                 data["anims"][name] = {
                     "frames": [dict(fr, t=[round(v, 4) for v in t]) if t != (0, 1, 1, 0, 0) else fr for t in frames],
@@ -509,15 +539,42 @@ def bake(sheet, boxes, density: float, folder: str, preview: list | None = None)
     print(f"{folder}: 12 pièces (densité {density})")
 
 
+def use_set(name: str):
+    """Points the module at one set: its sheet, its options, and its scale (the king as tall as the classic one)."""
+    global SET, CFG, SHEET, LAYOUT
+    SET, CFG = name, SETS[name]
+    SHEET = ROOT / "tools" / "art" / CFG["sheet"]
+    LAYOUT = 0.5
+    if name != "classic":
+        ref = np.array(Image.open(ROOT / "tools" / "art" / SETS["classic"]["sheet"]).convert("RGBA"))[..., 3]
+        k0 = _boxes(ref.astype(float))[("white", "king")]
+        target = (k0[3] - k0[1]) * 0.5 * ROLE_SCALE["king"][1]
+        sheet = np.array(Image.open(SHEET).convert("RGBA")).astype(float)
+        _key_green(sheet)
+        k1 = _boxes(sheet[..., 3])[("white", "king")]
+        LAYOUT = target / (k1[3] - k1[1])
+
+
+SET, CFG = "classic", SETS["classic"]
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--set", default="all", choices=["all", *SETS])
     ap.add_argument("--preview", help="sheet of the 12 pieces (PNG) for a quick look")
     a = ap.parse_args()
-    sheet, boxes = load_sheet()
-    shots: list = []
-    bake(sheet, boxes, 1.5, "classic", shots if a.preview else None)
-    bake(sheet, boxes, 1.0, "classic_1x")
-    if a.preview:
+    for name in (SETS if a.set == "all" else [a.set]):
+        use_set(name)
+        sheet, boxes = load_sheet()
+        shots: list = []
+        bake(sheet, boxes, 1.5, name, shots if a.preview else None)
+        bake(sheet, boxes, 1.0, name + "_1x")
+        if a.preview:
+            _preview(shots, a.preview if a.set != "all" else a.preview.replace(".png", f"_{name}.png"))
+
+
+def _preview(shots, path):
+    if True:
         W = sum(i.width for _, i, _ in shots[:6]) + 40 * 7
         H = 2 * max(i.height for _, i, _ in shots) + 60
         sheet_img = Image.new("RGBA", (W, H), (96, 128, 72, 255))
@@ -528,8 +585,8 @@ def main():
             for key, img, oy in shots[row * 6:(row + 1) * 6]:
                 sheet_img.alpha_composite(img, (x, int(y_row[row] - oy)))
                 x += img.width + 40
-        sheet_img.save(a.preview)
-        print("aperçu :", a.preview)
+        sheet_img.save(path)
+        print("aperçu :", path)
 
 
 if __name__ == "__main__":

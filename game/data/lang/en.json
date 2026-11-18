@@ -61,8 +61,6 @@
         "Normale": "Normal",
         "Rapide": "Fast",
         "Pièces cachées en transparence": "See-through hidden pieces",
-        "Pièces Bonta contre Brâkmar (au lieu des créatures)": "Bonta against Brâkmar pieces (instead of the creatures)",
-        "Pas fan des monstres ? Joue avec les pièces Bonta contre Brâkmar.": "Not fond of the monsters? Play with the Bonta against Brâkmar pieces.",
         "Fermer": "Close",
         "Vie autour du plateau (créatures, papillons)": "Life around the board (creatures, butterflies)",
         "Plein écran": "Fullscreen",
@@ -251,6 +249,11 @@
         "Le code du jeu est ouvert : réutilisable librement en citant ses auteurs.": "The game's code is open: free to reuse, crediting its authors.",
         "Visiter": "Visit",
         "Fredoka et Nunito": "Fredoka and Nunito",
-        "Sa base de parties ouverte (domaine public) a servi de référence pour régler les erreurs des adversaires. Merci pour ce site libre et gratuit.": "Its open game database (public domain) was the reference used to tune the opponents' mistakes. Thank you for this free and open site."
+        "Sa base de parties ouverte (domaine public) a servi de référence pour régler les erreurs des adversaires. Merci pour ce site libre et gratuit.": "Its open game database (public domain) was the reference used to tune the opponents' mistakes. Thank you for this free and open site.",
+        "Pas fan des monstres ? Choisis tes pièces :": "Not fond of the monsters? Pick your pieces:",
+        "Créatures": "Creatures",
+        "Bonta / Brâkmar": "Bonta / Brâkmar",
+        "Classiques": "Classic",
+        "Pièces": "Pieces"
     }
 }

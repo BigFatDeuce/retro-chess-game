@@ -20,15 +20,22 @@ static func choose_set(render_size: Vector2) -> void:
 	sprite_set = want
 
 
-## Classic Staunton pieces (tools/build_classic.py) instead of the creatures (Settings "classic_pieces").
-static var classic := false
+## The chess pieces (Settings "piece_set"): "" the creatures, else a set of still pictures baked by
+## tools/build_classic.py: "classic" (Bonta against Brâkmar) or "staunton" (ivory and ebony).
+const PIECE_SETS := ["", "classic", "staunton"]
+static var piece_set := ""
+
+
+## True when the pieces are still pictures (one way of fighting for all, no creature portraits).
+static func still_pieces() -> bool:
+	return piece_set != ""
 
 
 static func piece_path(side: String, role: String) -> String:
-	if classic:
-		var dir := "classic" + sprite_set
+	if still_pieces():
+		var dir := piece_set + sprite_set
 		if not FileAccess.file_exists("res://assets/gen/%s/white_king.json" % dir):
-			dir = "classic_1x" if sprite_set == "" else "classic"
+			dir = piece_set + ("_1x" if sprite_set == "" else "")
 		return "res://assets/gen/%s/%s_%s.json" % [dir, side, role]
 	return "res://assets/gen/pieces%s/%s_%s.json" % [sprite_set, side, role]
 

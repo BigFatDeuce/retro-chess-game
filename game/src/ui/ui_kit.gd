@@ -150,7 +150,7 @@ static func avatar_texture(id: String) -> Texture2D:
 	# HD portrait rendered from the vector drawing (tools/build_portraits.py), else the atlas frame
 	var hd := "res://assets/gen/portraits/%s.png" % id
 	var piece := id.begins_with("white_") or id.begins_with("black_")
-	if ResourceLoader.exists(hd) and not (piece and Atlas.classic):
+	if ResourceLoader.exists(hd) and not (piece and Atlas.still_pieces()):
 		return load(hd)
 	var path := Atlas.critter_path(id)
 	if id.begins_with("white_") or id.begins_with("black_"):

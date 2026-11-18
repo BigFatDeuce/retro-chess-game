@@ -14,7 +14,7 @@ const DEFAULTS := {
 	"ambient": 0.7,
 	"anim_speed": 1.0,  ## 0.75 slow, 1 normal, 1.5 fast
 	"see_through": true,
-	"classic_pieces": false,  ## the Bonta against Brâkmar chess pieces instead of the creatures
+	"piece_set": "",  ## the chess pieces: "" the creatures, "classic" Bonta against Brâkmar, "staunton" (Atlas.PIECE_SETS)
 	"pieces_tip": true,  ## the note offering them on the first boards (until the player uses its switch)
 	"ambient_life": true,
 	"fullscreen": false,
@@ -50,6 +50,8 @@ func _ready() -> void:
 			values[k] = cf.get_value("settings", k, DEFAULTS[k])
 		if int(cf.get_value("meta", "version", 1)) < 2:
 			values["max_fps"] = DEFAULTS["max_fps"]  # was "no cap" by default: the game drew as fast as it could
+		if bool(cf.get_value("settings", "classic_pieces", false)) and not cf.has_section_key("settings", "piece_set"):
+			values["piece_set"] = "classic"  # before the third set: a switch, creatures or Bonta against Brâkmar
 		if int(cf.get_value("meta", "version", 1)) < 3:
 			values["web_resolution"] = 0  # was 1080p by default: blurred on larger screens
 	if String(values["language"]) == "":
@@ -90,8 +92,8 @@ func _apply(key: String) -> void:
 	match key:
 		"language":
 			Lang.apply(String(values[key]))
-		"classic_pieces":
-			Atlas.classic = bool(values[key])
+		"piece_set":
+			Atlas.piece_set = String(values[key]) if String(values[key]) in Atlas.PIECE_SETS else ""
 		"web_resolution":
 			_apply_web_height()
 		"performance":
