@@ -1,0 +1,14 @@
+game/.godot/
+game/assets/gen/
+game/assets/brand/
+game/assets/web/
+game/bin/*.dll
+game/bin/*.so
+native/build/
+native/bin/
+native/web/out/
+native/thirdparty/godot-cpp/
+tools/bin/
+build/
+*.import
+__pycache__/

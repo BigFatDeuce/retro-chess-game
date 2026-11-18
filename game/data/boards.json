@@ -1,0 +1,1417 @@
+{
+ "_doc": "Les plateaux (environnements). Tout vient des assets de la bibliothèque locale : g1_* = tuiles de sol (losanges dépliés en cases carrées), o*_* = objets de décor. light / dark = textures des cases claires et foncées (plusieurs = variété), *_tint = réglage de luminosité (bright), saturation (sat), contraste, multiplicateur rgb (mul) pour que les deux couleurs se lisent d'un coup d'œil. ground = sol autour du plateau, border = bande qui encadre les cases. decor : objets debout, u = position en travers (0..8 = largeur du plateau), v = profondeur (0 = bord avant, 8 = bord arrière) ; jamais sur le plateau, et devant lui (v < 0) seulement des objets bas qui ne cachent aucune pièce. flip = objet retourné. decor_scale = échelle de tous les objets. square_repeat > 0 : light/dark sont des sols peints posés en continu sur le plateau (une répétition tous les N cases) au lieu d'une tuile par case. scatter : décor semé automatiquement (graine seed) dans des zones autour du plateau (back, left, right, near_left, near_right, front ; front = objets bas seulement), espacé de gap cases ; flat = posé à plat sur le sol (sous les pièces). critters : créatures d'ambiance (data/critters.json), pool = lesquelles, count = combien. ambient : vie dans l'air (butterflies = papillons, pollen = poussières de lumière, leaves = feuilles qui tombent des arbres par minute ÷ 10, fireflies = lucioles, clouds = ombres de nuages, 0..1).",
+ "boards": {
+  "prairie": {
+   "name": "Les Prairies",
+   "light": [
+    "g1_106"
+   ],
+   "light_tint": {
+    "bright": 1.04,
+    "sat": 0.85
+   },
+   "dark": [
+    "g1_268"
+   ],
+   "dark_tint": {
+    "bright": 0.74,
+    "sat": 1.1,
+    "contrast": 1.08
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.95
+   },
+   "decor_scale": 1.0,
+   "decor": [
+    {
+     "sym": "o1_57",
+     "u": -1.5,
+     "v": 9.0,
+     "scale": 0.6
+    },
+    {
+     "sym": "o1_58",
+     "u": 9.6,
+     "v": 8.6,
+     "scale": 0.6
+    }
+   ],
+   "ground_tint": {
+    "bright": 0.86,
+    "sat": 0.72,
+    "contrast": 1.05
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 11,
+   "scatter": [
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_230",
+      "o1_234"
+     ],
+     "count": 22,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_230"
+     ],
+     "count": 12,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o1_216",
+      "o1_205"
+     ],
+     "count": 20,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o1_220",
+      "o1_221",
+      "o1_201",
+      "o1_225",
+      "o1_24",
+      "o2_543"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "piou_jaune",
+     "tofu",
+     "piou_rouge",
+     "bouftou",
+     "piou_bleu",
+     "tofu"
+    ],
+    "count": 7
+   },
+   "ambient": {
+    "butterflies": 7,
+    "pollen": 45,
+    "leaves": 1.0,
+    "clouds": 1.0
+   },
+   "accent": "8fd14a"
+  },
+  "forest": {
+   "name": "La Forêt",
+   "light": [
+    "g1_253"
+   ],
+   "light_tint": {
+    "bright": 1.08,
+    "sat": 0.8
+   },
+   "dark": [
+    "g1_105"
+   ],
+   "dark_tint": {
+    "bright": 0.82,
+    "sat": 0.9,
+    "contrast": 1.05
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.8
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.68,
+    "sat": 0.85,
+    "mul": [
+     0.85,
+     1.0,
+     0.85
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 21,
+   "scatter": [
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_228",
+      "o1_232",
+      "o1_230",
+      "o1_234"
+     ],
+     "count": 30,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_228",
+      "o1_230",
+      "o1_234"
+     ],
+     "count": 18,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o1_216",
+      "o4_1721",
+      "o4_1722",
+      "o1_205"
+     ],
+     "count": 26,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_541",
+      "o2_543",
+      "o1_221",
+      "o2_544",
+      "o1_220"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "piou_bleu",
+     "tofu",
+     "piou_jaune",
+     "bouftou"
+    ],
+    "count": 5
+   },
+   "ambient": {
+    "butterflies": 4,
+    "pollen": 60,
+    "leaves": 2.0,
+    "clouds": 0.6,
+    "fireflies": 6
+   },
+   "accent": "4fae5a"
+  },
+  "beach": {
+   "name": "Les Calanques",
+   "light": [
+    "g1_135"
+   ],
+   "light_tint": {
+    "bright": 1.03,
+    "sat": 0.9
+   },
+   "dark": [
+    "g1_105"
+   ],
+   "dark_tint": {
+    "bright": 0.95,
+    "sat": 0.85,
+    "contrast": 1.05
+   },
+   "ground": "g1_73",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 1.0
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.95,
+    "sat": 0.9
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 31,
+   "scatter": [
+    {
+     "syms": [
+      "o8_4209",
+      "o8_4212",
+      "o9_3935",
+      "o9_3936",
+      "o9_3937",
+      "o9_3938"
+     ],
+     "count": 14,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o8_4209",
+      "o8_4212",
+      "o9_3935",
+      "o9_3936",
+      "o9_3937",
+      "o9_3938"
+     ],
+     "count": 10,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o9_3925",
+      "o9_3926",
+      "o9_3928",
+      "o9_3929",
+      "o9_4002"
+     ],
+     "count": 14,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o8_3528",
+      "o8_3552",
+      "o8_3553",
+      "o8_3550",
+      "o8_3573",
+      "o8_3574",
+      "o8_3575",
+      "o9_4122",
+      "o9_4124"
+     ],
+     "count": 26,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "crabe",
+     "etoile",
+     "crabe",
+     "piou_bleu"
+    ],
+    "count": 6
+   },
+   "ambient": {
+    "butterflies": 2,
+    "pollen": 20,
+    "clouds": 1.0
+   },
+   "accent": "4cc3d6"
+  },
+  "fields": {
+   "name": "Les Champs",
+   "light": [
+    "g1_411"
+   ],
+   "light_tint": {
+    "bright": 1.0,
+    "sat": 0.55,
+    "contrast": 0.95
+   },
+   "dark": [
+    "g1_105"
+   ],
+   "dark_tint": {
+    "bright": 0.82,
+    "sat": 0.95
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.95
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.95,
+    "sat": 0.7,
+    "mul": [
+     1.12,
+     1.0,
+     0.7
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 41,
+   "scatter": [
+    {
+     "syms": [
+      "o1_229",
+      "o1_230",
+      "o1_234",
+      "o1_232",
+      "o1_233",
+      "o1_215"
+     ],
+     "count": 16,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_229",
+      "o1_230",
+      "o1_234",
+      "o1_232",
+      "o1_233",
+      "o1_215"
+     ],
+     "count": 10,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o1_216",
+      "o1_220"
+     ],
+     "count": 20,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_541",
+      "o2_543",
+      "o1_24",
+      "o1_225",
+      "o1_205",
+      "o2_752"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "bouftou",
+     "piou_jaune",
+     "tofu",
+     "bouftou",
+     "piou_rouge"
+    ],
+    "count": 7
+   },
+   "ambient": {
+    "butterflies": 9,
+    "pollen": 50,
+    "leaves": 1.5,
+    "clouds": 1.0
+   },
+   "accent": "f0c040"
+  },
+  "village": {
+   "name": "Le Village",
+   "light": [
+    "g1_438"
+   ],
+   "light_tint": {
+    "bright": 1.0,
+    "sat": 0.8
+   },
+   "dark": [
+    "g1_1"
+   ],
+   "dark_tint": {
+    "bright": 0.6,
+    "sat": 0.95,
+    "contrast": 1.1
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.9
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.9,
+    "sat": 0.8
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 51,
+   "scatter": [
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_229",
+      "o1_230",
+      "o1_235",
+      "o1_234"
+     ],
+     "count": 16,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_215",
+      "o1_230"
+     ],
+     "count": 10,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o1_216",
+      "o1_220",
+      "o1_221",
+      "o2_543"
+     ],
+     "count": 20,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o1_160",
+      "o2_752",
+      "o2_755",
+      "o2_544",
+      "o2_550",
+      "o1_220"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "piou_jaune",
+     "piou_rouge",
+     "piou_bleu",
+     "tofu",
+     "piou_jaune"
+    ],
+    "count": 7
+   },
+   "ambient": {
+    "butterflies": 5,
+    "pollen": 35,
+    "leaves": 0.8,
+    "clouds": 1.0
+   },
+   "accent": "e8954e"
+  },
+  "mountain": {
+   "name": "Les Cimes",
+   "light": [
+    "g1_289"
+   ],
+   "light_tint": {
+    "bright": 1.05,
+    "sat": 0.7
+   },
+   "dark": [
+    "g1_172"
+   ],
+   "dark_tint": {
+    "bright": 0.8,
+    "sat": 0.6,
+    "contrast": 1.05
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.85,
+    "sat": 0.7
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.85,
+    "sat": 0.55,
+    "mul": [
+     0.95,
+     1.0,
+     0.95
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 61,
+   "scatter": [
+    {
+     "syms": [
+      "o1_228",
+      "o1_229",
+      "o1_232",
+      "o1_233",
+      "o1_215"
+     ],
+     "count": 12,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_228",
+      "o1_232",
+      "o1_233"
+     ],
+     "count": 8,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_216",
+      "o1_207",
+      "o1_220",
+      "o1_221",
+      "o2_551"
+     ],
+     "count": 20,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_544",
+      "o2_550",
+      "o2_556",
+      "o1_221",
+      "o2_543",
+      "o2_551"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    },
+    {
+     "syms": [
+      "o2_544",
+      "o2_550",
+      "o2_556"
+     ],
+     "count": 20,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.8
+     ],
+     "gap": 1.6
+    }
+   ],
+   "critters": {
+    "pool": [
+     "tofu",
+     "bouftou",
+     "piou_bleu"
+    ],
+    "count": 4
+   },
+   "ambient": {
+    "butterflies": 2,
+    "pollen": 25,
+    "clouds": 1.0
+   },
+   "accent": "a9b8c8"
+  },
+  "swamp": {
+   "name": "La Tourbière",
+   "light": [
+    "g1_445"
+   ],
+   "light_tint": {
+    "bright": 1.1,
+    "sat": 0.85
+   },
+   "dark": [
+    "g1_188"
+   ],
+   "dark_tint": {
+    "bright": 1.4,
+    "sat": 0.85,
+    "contrast": 0.92
+   },
+   "ground": "g1_445",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.7
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.7,
+    "sat": 0.8,
+    "mul": [
+     0.9,
+     1.0,
+     0.88
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 71,
+   "scatter": [
+    {
+     "syms": [
+      "o10_4221",
+      "o10_4222",
+      "o10_4226",
+      "o9_3935",
+      "o9_3936",
+      "o9_3937"
+     ],
+     "count": 24,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o10_4221",
+      "o10_4222",
+      "o10_4226",
+      "o9_3935",
+      "o9_3936",
+      "o9_3937"
+     ],
+     "count": 14,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o11_4772",
+      "o11_4773",
+      "o11_4774",
+      "o11_4775",
+      "o11_4706",
+      "o11_4707"
+     ],
+     "count": 26,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o11_4704",
+      "o11_4705",
+      "o11_4736",
+      "o11_4737",
+      "o10_4680"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "piou_bleu",
+     "tofu"
+    ],
+    "count": 3
+   },
+   "ambient": {
+    "butterflies": 2,
+    "pollen": 30,
+    "fireflies": 24,
+    "clouds": 0.7
+   },
+   "accent": "9a7ed0"
+  },
+  "graveyard": {
+   "name": "Le Cimetière",
+   "light": [
+    "g1_1"
+   ],
+   "light_tint": {
+    "bright": 0.92,
+    "sat": 0.5
+   },
+   "dark": [
+    "g1_284"
+   ],
+   "dark_tint": {
+    "bright": 0.9,
+    "sat": 0.8
+   },
+   "ground": "g1_222",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.7,
+    "sat": 0.7
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.5,
+    "sat": 0.45,
+    "mul": [
+     0.8,
+     0.9,
+     0.75
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 81,
+   "scatter": [
+    {
+     "syms": [
+      "o1_40",
+      "o1_43",
+      "o1_44",
+      "o1_232",
+      "o1_233",
+      "o1_234"
+     ],
+     "count": 12,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o1_43",
+      "o1_232",
+      "o1_233"
+     ],
+     "count": 8,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o1_207",
+      "o1_216",
+      "o2_710",
+      "o2_711"
+     ],
+     "count": 14,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_541",
+      "o1_221",
+      "o2_543",
+      "o2_551",
+      "o2_556"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    },
+    {
+     "syms": [
+      "o2_689",
+      "o2_691",
+      "o2_672",
+      "o2_673",
+      "o2_675",
+      "o2_687",
+      "o2_688"
+     ],
+     "count": 26,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.15
+     ],
+     "gap": 1.0
+    },
+    {
+     "syms": [
+      "o2_679",
+      "o2_680",
+      "o2_681",
+      "o2_682",
+      "o2_683"
+     ],
+     "count": 10,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.1
+     ],
+     "gap": 1.2
+    }
+   ],
+   "critters": {
+    "pool": [
+     "tofu"
+    ],
+    "count": 2
+   },
+   "ambient": {
+    "pollen": 15,
+    "fireflies": 30,
+    "clouds": 0.9
+   },
+   "accent": "8a9bb8"
+  },
+  "tundra": {
+   "name": "La Toundra",
+   "light": [
+    "g1_341"
+   ],
+   "light_tint": {
+    "bright": 1.0,
+    "sat": 0.9
+   },
+   "dark": [
+    "g1_246"
+   ],
+   "dark_tint": {
+    "bright": 0.78,
+    "sat": 1.0,
+    "contrast": 1.05
+   },
+   "ground": "g1_341",
+   "ground_repeat": 4.5,
+   "border": "g1_289",
+   "border_tint": {
+    "bright": 0.75
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.95,
+    "sat": 0.85
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 91,
+   "scatter": [
+    {
+     "syms": [
+      "o3_1083",
+      "o3_1084",
+      "o3_1085"
+     ],
+     "count": 12,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o3_1083",
+      "o3_1084"
+     ],
+     "count": 8,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o2_544",
+      "o2_550"
+     ],
+     "count": 12,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_556",
+      "o2_543"
+     ],
+     "count": 16,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    }
+   ],
+   "critters": {
+    "pool": [
+     "tofu",
+     "piou_bleu"
+    ],
+    "count": 3
+   },
+   "ambient": {
+    "pollen": 70,
+    "clouds": 0.8
+   },
+   "accent": "a6e2f6"
+  },
+  "moor": {
+   "name": "La Lande",
+   "light": [
+    "g1_253"
+   ],
+   "light_tint": {
+    "bright": 0.95,
+    "sat": 0.75
+   },
+   "dark": [
+    "g1_284"
+   ],
+   "dark_tint": {
+    "bright": 1.35,
+    "sat": 0.85,
+    "contrast": 0.92
+   },
+   "ground": "g1_284",
+   "ground_repeat": 4.5,
+   "border": "g1_252",
+   "border_tint": {
+    "bright": 0.75
+   },
+   "decor_scale": 1.0,
+   "decor": [],
+   "ground_tint": {
+    "bright": 0.9,
+    "sat": 0.9,
+    "mul": [
+     1.0,
+     0.95,
+     0.85
+    ]
+   },
+   "square_repeat": 2.0,
+   "border_painted": true,
+   "seed": 101,
+   "scatter": [
+    {
+     "syms": [
+      "o3_1083",
+      "o3_1084",
+      "o3_1085"
+     ],
+     "count": 14,
+     "zones": [
+      "back"
+     ],
+     "scale": [
+      1.3,
+      1.8
+     ],
+     "gap": 2.2
+    },
+    {
+     "syms": [
+      "o3_1083",
+      "o3_1084",
+      "o3_1085"
+     ],
+     "count": 10,
+     "zones": [
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.2,
+      1.6
+     ],
+     "gap": 2.4
+    },
+    {
+     "syms": [
+      "o3_1221",
+      "o3_1220",
+      "o1_220"
+     ],
+     "count": 18,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 1.3
+    },
+    {
+     "syms": [
+      "o2_577",
+      "o1_221",
+      "o2_580",
+      "o3_1226",
+      "o2_543"
+     ],
+     "count": 34,
+     "zones": [
+      "back",
+      "left",
+      "right",
+      "near_left",
+      "near_right"
+     ],
+     "scale": [
+      0.9,
+      1.3
+     ],
+     "gap": 0.7
+    },
+    {
+     "syms": [
+      "o2_577",
+      "o2_580",
+      "o3_1226"
+     ],
+     "count": 12,
+     "zones": [
+      "back",
+      "left",
+      "right"
+     ],
+     "scale": [
+      1.1,
+      1.6
+     ],
+     "gap": 1.6
+    }
+   ],
+   "critters": {
+    "pool": [
+     "tofu"
+    ],
+    "count": 2
+   },
+   "ambient": {
+    "pollen": 30,
+    "leaves": 0.5,
+    "clouds": 1.0,
+    "fireflies": 8
+   },
+   "accent": "d07aa0"
+  }
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "_doc": "Bruitages hors animations (les attaques, sorts, coups et morts jouent les sons portés par les animations des créatures). Valeurs = nom de son (data/sfx_map.json) ou fichier fx_N. Une liste = tirage au hasard. ambient = boucle d'ambiance par plateau, volume en dB.",
+ "ui": {
+  "click": "click",
+  "hover": "click3",
+  "open": "click2"
+ },
+ "game": {
+  "select": "click2",
+  "start": "turn_start",
+  "your_turn": "bip",
+  "check": "game_event",
+  "mate": "coup_critique",
+  "leap": "saut",
+  "land": "blop_step",
+  "promote": "stars",
+  "castle": "rapid_swish"
+ },
+ "steps": {
+  "small": ["step_little", "step_little2"],
+  "normal": ["cartoon_step", "cartoon_step2"],
+  "heavy": ["krak_step", "krak_step2"]
+ },
+ "ambient": {
+  "prairie": {"sound": "cania_oiseaux", "db": -10.0},
+  "forest": {"sound": "foret01", "db": -10.0},
+  "fields": {"sound": "criquet", "db": -12.0},
+  "moor": {"sound": "cania_wind", "db": -12.0}
+ }
+}

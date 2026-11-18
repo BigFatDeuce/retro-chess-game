@@ -1,0 +1,152 @@
+{
+ "_doc": "Les 10 adversaires, du plus faible au plus fort. elo = force affichée : le classement Lichess (parties rapides) des joueurs humains que l'adversaire imite (docs/HUMAN_AI.md). engine.human = ce classement, donné à src/ai/human_mind.gd (le moteur à pleine force évalue les coups, le modèle choisit comme un humain de ce niveau) ; engine.style = son caractère : greed (gourmandise, 1 = normale), aggression (goût des échecs, 0-1). Un engine peut aussi donner les réglages bruts du moteur : skill, depth ou movetime, uci_elo. board = décor de la partie (data/boards.json). avatar = portrait. intro = phrase de présentation sur la carte de l'adversaire.",
+ "opponents": [
+  {
+   "id": "o1",
+   "name": "Le Gardien des Prairies",
+   "elo": 450,
+   "measured": true,
+   "board": "prairie",
+   "engine": {
+    "human": 450
+   },
+   "avatar": "piou_bleu",
+   "intro": "Il apprend encore les règles… et compte sur les Pious pour l'aider."
+  },
+  {
+   "id": "o2",
+   "name": "L'Ermite de la Forêt",
+   "elo": 600,
+   "measured": true,
+   "board": "forest",
+   "engine": {
+    "human": 600,
+    "style": {
+     "greed": 0.9
+    }
+   },
+   "avatar": "bouftou",
+   "intro": "Il joue lentement, entre deux siestes à l'ombre des grands arbres."
+  },
+  {
+   "id": "o3",
+   "name": "Le Pêcheur des Calanques",
+   "elo": 700,
+   "measured": true,
+   "board": "beach",
+   "engine": {
+    "human": 700,
+    "style": {
+     "greed": 1.2
+    }
+   },
+   "avatar": "crabe",
+   "intro": "Patient comme la marée, il attend qu'une pièce reste sans défense."
+  },
+  {
+   "id": "o4",
+   "name": "La Glaneuse des Champs",
+   "elo": 800,
+   "measured": true,
+   "board": "fields",
+   "engine": {
+    "human": 800,
+    "style": {
+     "greed": 1.4
+    }
+   },
+   "avatar": "tofu",
+   "intro": "Elle ramasse tout ce qui traîne : surveille tes pions."
+  },
+  {
+   "id": "o5",
+   "name": "Le Maître du Village",
+   "elo": 1000,
+   "measured": true,
+   "board": "village",
+   "engine": {
+    "human": 1000,
+    "style": {
+     "aggression": 0.5
+    }
+   },
+   "avatar": "black_knight",
+   "intro": "Le meilleur joueur du village. Il connaît quelques pièges classiques."
+  },
+  {
+   "id": "o6",
+   "name": "Le Seigneur des Cimes",
+   "elo": 1200,
+   "measured": true,
+   "board": "mountain",
+   "engine": {
+    "human": 1200,
+    "style": {
+     "greed": 0.9
+    }
+   },
+   "avatar": "black_rook",
+   "intro": "Solide comme la roche, il adore les tours et les colonnes ouvertes."
+  },
+  {
+   "id": "o7",
+   "name": "La Sorcière des Tourbières",
+   "elo": 1400,
+   "measured": true,
+   "board": "swamp",
+   "engine": {
+    "human": 1400,
+    "style": {
+     "aggression": 0.8
+    }
+   },
+   "avatar": "black_bishop",
+   "intro": "Ses attaques surgissent de la brume, sans prévenir."
+  },
+  {
+   "id": "o8",
+   "name": "Le Gardien des Tombes",
+   "elo": 1600,
+   "measured": true,
+   "board": "graveyard",
+   "engine": {
+    "human": 1600,
+    "style": {
+     "aggression": 0.2
+    }
+   },
+   "avatar": "black_queen",
+   "intro": "Froid et méthodique, il ne laisse rien passer."
+  },
+  {
+   "id": "o9",
+   "name": "La Reine des Glaces",
+   "elo": 1800,
+   "measured": true,
+   "board": "tundra",
+   "engine": {
+    "human": 1800,
+    "style": {
+     "greed": 0.9
+    }
+   },
+   "avatar": "white_queen",
+   "intro": "Calculs glacés et plans à long terme : la patience est sa force."
+  },
+  {
+   "id": "o10",
+   "name": "Le Seigneur de la Lande",
+   "elo": 2000,
+   "measured": true,
+   "board": "moor",
+   "engine": {
+    "human": 2000,
+    "style": {
+     "aggression": 0.4
+    }
+   },
+   "avatar": "black_king",
+   "intro": "Le dernier champion. Rares sont ceux qui ont quitté sa lande en vainqueurs."
+  }
+ ]
+}

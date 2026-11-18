@@ -1,0 +1,33 @@
+Retro Chess — licence
+
+What this licence covers: the code and documents in this repository written for Retro Chess (game/, tools/, docs/,
+native/CMakeLists.txt and the build scripts), released under the MIT licence below. You may reuse, change and
+share them, for any purpose, as long as you keep this notice: credit "Retro Chess by BigFatDeuce" and link to
+https://github.com/BigFatDeuce/retro-chess-game.
+
+What it does not cover:
+- native/thirdparty/stockfish: Stockfish 11, by the Stockfish developers, GPLv3 (see its Copying.txt).
+- native/src (the engine extension built with Stockfish): GPLv3, like Stockfish. The game as distributed (it links
+  Stockfish) is subject to the GPLv3 as a whole; MIT code is compatible with it.
+- game/assets/fonts: Fredoka and Nunito, SIL Open Font License (see the OFL files next to them).
+- The creatures, scenery, sounds and music of the game are from Dofus Retro, © Ankama. They are not in this
+  repository and are not covered by any licence here; the tools rebuild them from a Dofus Retro install.
+
+------------------------------------------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 BigFatDeuce
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

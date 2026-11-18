@@ -1,0 +1,47 @@
+{
+ "_doc": "Créatures d'ambiance autour du plateau (assets de la bibliothèque locale), sans combat : elles se promènent, s'arrêtent, font leur petite animation (bonus) et repartent ; les peureuses (scared) détalent quand une pièce passe près d'elles. scale = échelle à l'écran au premier rang (les pièces font 3.3 à 5.8). speed en cases par seconde. Les plateaux choisissent leurs créatures (boards.json \"critters\").",
+ "critters": {
+  "piou_jaune": {
+   "gfx": 9202,
+   "scale": 4.2,
+   "behaviour": "wander",
+   "speed": 0.55
+  },
+  "piou_rouge": {
+   "gfx": 9204,
+   "scale": 4.2,
+   "behaviour": "wander",
+   "speed": 0.55
+  },
+  "piou_bleu": {
+   "gfx": 1212,
+   "scale": 4.2,
+   "behaviour": "wander",
+   "speed": 0.55
+  },
+  "tofu": {
+   "gfx": 1558,
+   "scale": 4.0,
+   "behaviour": "scared",
+   "speed": 0.75
+  },
+  "bouftou": {
+   "gfx": 1566,
+   "scale": 3.9,
+   "behaviour": "graze",
+   "speed": 0.35
+  },
+  "crabe": {
+   "gfx": 1009,
+   "scale": 3.6,
+   "behaviour": "scared",
+   "speed": 0.6
+  },
+  "etoile": {
+   "gfx": 1474,
+   "scale": 3.2,
+   "behaviour": "graze",
+   "speed": 0.25
+  }
+ }
+}

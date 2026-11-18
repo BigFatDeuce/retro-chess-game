@@ -5,7 +5,7 @@
 <p align="center">
   <b>Chess, with living pieces.</b><br>
   Every piece is a creature that walks, fights and falls on illustrated boards,<br>
-  against ten champions from 450 to 1900 Elo.
+  against ten champions from 450 to 2000 Elo who play like real people.
 </p>
 
 <p align="center">
@@ -17,23 +17,28 @@
 </p>
 
 <p align="center">
-  <img src="media/boards.gif" alt="Opening moves on six of the boards of Retro Chess" width="900">
+  <a href="https://discord.gg/N8f62M2eaK"><img alt="Join the Discord" src="https://img.shields.io/badge/Join%20the-Discord-5865f2?style=for-the-badge&logo=discord&logoColor=white"></a>
+</p>
+
+<p align="center">
+  <img src="media/summary.gif" alt="Retro Chess: the title screen, the champions' path, games on several boards, the Bonta against Brâkmar pieces and a victory" width="900">
 </p>
 
 ---
 
 ## ✨ Features
 
-- **The Champions' Path:** ten opponents, one per board, from a beginner who barely knows the rules to a 1900 Elo master. Each Elo was measured against a calibrated engine.
+- **The Champions' Path:** ten opponents, one per board, from a beginner who barely knows the rules to a 2000 Elo master, each with a character of their own.
+- **Opponents that play like people:** they don't play random moves to be weak. Like real players of their rating, they leave a piece en prise or miss a fork, and they make fewer mistakes as the rating rises. Their mistakes were tuned on real games from the Lichess database ([how it works](docs/HUMAN_AI.md)).
 - **Free play:** from the start, pick any board and any strength from 400 to 2800 Elo.
 - **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
 - **Animated armies:** every move is a walk, every capture a fight, with ranged pieces that shoot from afar.
 - **Look closer:** zoom and pan around the board, or hold the right mouse button and drag up to stand up and look down on it, so no piece hides behind another.
 - **Two players on one screen**, and up to five player profiles per device, each with its own progress and portrait.
-- **Classic pieces** if you prefer them: a hand-drawn Staunton set in the same style, with its own little animations.
+- **Bonta against Brâkmar** if you prefer chess pieces to creatures: angels of Bonta against demons of Brâkmar, hand-drawn in the same style, with their own little animations.
 - **A real engine:** Stockfish runs inside the game, on every platform, including the browser version.
-- **English and French**, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser a resolution choice (540p to 2160p) and a performance mode for modest computers.
+- **English and French**, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser the same full-size pictures as on Windows, drawn at your screen's resolution, full screen with F11, and a performance mode for modest computers.
 
 ## 💾 Install
 
@@ -49,13 +54,27 @@ The Windows and Android versions check this page at launch. When a new version i
 on Windows the game downloads it, closes, installs it and starts again by itself; on Android the system installer
 opens with the new version. The check can be turned off in the settings.
 
+## 🧠 Source code
+
+All of the game's code is here: the game itself (Godot 4, GDScript), the tools that build its pictures and sounds,
+the chess engine extension and the human-like opponents.
+
+- **Human-like opponents:** [docs/HUMAN_AI.md](docs/HUMAN_AI.md) explains how they were made and measured, and how to
+  reuse them with any UCI engine.
+- **Building the game:** the creatures, scenery, sounds and music are not in this repository (they belong to Ankama).
+  The tools in `tools/` rebuild them from a Dofus Retro install. The engine extension is built from
+  [native/](native/README.md).
+
 ## 📜 Credits and licence
 
-Creatures, scenery, sounds and music: [Dofus Retro](https://www.dofus-retro.com/), © Ankama. Retro Chess is a free fan game, not affiliated with Ankama.
+Retro Chess is a free fan game with no commercial aim, not affiliated with Ankama. Thank you to everyone whose work it
+stands on: **[CREDITS.md](CREDITS.md)**.
 
+- Creatures, scenery, sounds and music: [Dofus Retro](https://www.dofus-retro.com/), © Ankama. They are not covered by
+  this repository's licence.
+- Opponents: [Stockfish 11](https://stockfishchess.org/) (GPLv3), tuned on the [Lichess](https://lichess.org/) open
+  database.
+- Made with [Godot Engine](https://godotengine.org/) (MIT).
 
-Retro Chess uses [Stockfish 11](https://stockfishchess.org/) (GPLv3) for its opponents. The source code of the engine
-as built into the game (Windows, Android and WebAssembly) is attached to every release as
-`RetroChess-engine-source.zip`.
-
-Made with [Godot Engine](https://godotengine.org/) (MIT).
+The game's own code is under the **MIT licence**: reuse it freely, crediting "Retro Chess by BigFatDeuce" with a link
+to this page. Stockfish and the engine extension are GPLv3 ([LICENSE](LICENSE)).

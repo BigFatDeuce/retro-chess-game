@@ -1,0 +1,4 @@
+{
+ "_doc": "Portraits proposés pour les profils : personnages non joueurs de la bibliothèque locale (illustrations clips/artworks/big/<gfx>.swf), cadrés en buste par tools/build_portraits.py --npc vers assets/gen/portraits/<id>.png. Le premier sert de portrait par défaut.",
+ "avatars": [9036, 9028, 9005, 9012, 9015, 9007, 9019, 9043, 9022, 9033, 9026, 9089, 9035, 9094, 9087, 9027, 9301, 9370, 9093, 9091, 9006, 9309, 9200, 9073]
+}
