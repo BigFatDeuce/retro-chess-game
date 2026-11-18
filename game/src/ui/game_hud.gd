@@ -68,7 +68,7 @@ func setup(p_game: ChessGame, _a := "", _b := "") -> void:
 		_actions.add_child(b)
 	# history
 	_history_panel = Ui.panel("Parchment")
-	_history_panel.custom_minimum_size = Vector2(480, 0)
+	_history_panel.custom_minimum_size = Vector2(420, 0)
 	_right.add_child(_history_panel)
 	var hv := Ui.vbox(Pal.S1)
 	_history_panel.add_child(hv)
@@ -78,7 +78,7 @@ func setup(p_game: ChessGame, _a := "", _b := "") -> void:
 	hh.add_child(hi)
 	hh.add_child(Ui.label("Coups joués", "Ink", Pal.FS_SMALL + 2))
 	_history_scroll = ScrollContainer.new()
-	_history_scroll.custom_minimum_size = Vector2(0, 470)
+	_history_scroll.custom_minimum_size = Vector2(0, 340)
 	_history_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	hv.add_child(_history_scroll)
 	_history_list = Ui.vbox(2)
@@ -167,7 +167,7 @@ func pieces_tip(show: bool) -> void:
 	if not show or not bool(Settings.get_value("pieces_tip")):
 		return
 	_tip = Ui.panel("Plate")
-	_tip.custom_minimum_size = Vector2(480, 0)
+	_tip.custom_minimum_size = Vector2(420, 0)
 	_right.add_child(_tip)
 	_right.move_child(_tip, 1)  # under the action buttons
 	var h := Ui.hbox(Pal.S2)
@@ -250,21 +250,21 @@ func set_players(p_opponent: Dictionary) -> void:
 
 func _plate(avatar: String, title: String, sub: String, side: int) -> Control:
 	var p := Ui.panel("Plate")
-	p.custom_minimum_size = Vector2(540, 0)
+	p.custom_minimum_size = Vector2(430, 0)  # compact: clear of the board's frame
 	p.mouse_filter = Control.MOUSE_FILTER_STOP
 	var h := Ui.hbox(Pal.S2)
 	p.add_child(h)
-	var m := Medallion.make(UiKit.avatar_texture(avatar), 124)
+	var m := Medallion.make(UiKit.avatar_texture(avatar), 92)
 	m.badge = false
 	m.name = "Medallion"
 	h.add_child(m)
 	var v := Ui.vbox(2, BoxContainer.ALIGNMENT_CENTER)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(v)
-	var t := Ui.label(title, "H2", 36 if title.length() <= 18 else 32)
+	var t := Ui.label(title, "H2", 30 if title.length() <= 18 else 26)
 	t.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	t.max_lines_visible = 2
-	t.custom_minimum_size = Vector2(340, 0)
+	t.custom_minimum_size = Vector2(290, 0)
 	v.add_child(t)
 	var sr := Ui.hbox(Pal.S1)
 	v.add_child(sr)
@@ -278,7 +278,7 @@ func _plate(avatar: String, title: String, sub: String, side: int) -> Control:
 	sr.add_child(Ui.label(sub, "Dim", Pal.FS_TINY + 2))
 	var caps := Ui.hbox(-14)
 	caps.name = "Captures"
-	caps.custom_minimum_size = Vector2(0, 44)
+	caps.custom_minimum_size = Vector2(0, 36)
 	v.add_child(caps)
 	var think := Ui.label("", "Small", Pal.FS_TINY + 2, Pal.GOLD_HI)
 	think.name = "Think"
