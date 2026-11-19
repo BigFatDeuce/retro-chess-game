@@ -181,7 +181,12 @@ func _switch(key: String, icon: String, text: String) -> void:
 
 
 func _choice(key: String, icon: String, text: String, options: Array) -> void:
-	var h := Ui.hbox(Pal.S2)
+	var h: Container = Ui.hbox(Pal.S2)
+	if options.size() > 4:  # the languages: two rows of chips
+		h = GridContainer.new()
+		(h as GridContainer).columns = 3
+		h.add_theme_constant_override("h_separation", Pal.S2)
+		h.add_theme_constant_override("v_separation", Pal.S2)
 	var g := ButtonGroup.new()
 	var cur: Variant = Settings.get_value(key)
 	for o in options:

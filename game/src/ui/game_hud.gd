@@ -232,7 +232,7 @@ func _update_piece_tip(delta: float) -> void:
 	if _ptip_t < PTIP_DELAY:
 		return
 	var role := Lang.t(String(ROLE_NAMES[p.side][p.role]))
-	var nm := "" if Atlas.still_pieces() else String(p.def.get("name", ""))
+	var nm := "" if Atlas.still_pieces() else Lang.t(String(p.def.get("name", "")))
 	_ptip_name.text = nm if nm != "" else role
 	_ptip_role.text = role
 	_ptip_role.visible = nm != ""
@@ -511,7 +511,7 @@ func _rebuild_history() -> void:
 		for k in 2:
 			var idx := i * 2 + k
 			var t := String(items[idx]) if idx < items.size() else ""
-			var l := Ui.label(_fr_san(t), "Ink", Pal.FS_SMALL + 2)
+			var l := Ui.label(_local_san(t), "Ink", Pal.FS_SMALL + 2)
 			l.custom_minimum_size = Vector2(160, 0)
 			if last and idx == items.size() - 1:
 				l.add_theme_color_override("font_color", Pal.EMBER_LO)
@@ -528,16 +528,15 @@ func _scroll_history_end() -> void:
 		_history_scroll.scroll_vertical = int(_history_scroll.get_v_scroll_bar().max_value)
 
 
-## Algebraic notation with the French piece letters (R, D, T, F, C).
-static func _fr_san(s: String) -> String:
-	if s.is_empty() or s == "…" or Lang.is_en():
+## Algebraic notation with the piece letters of the current language (French: R, D, T, F, C).
+static func _local_san(s: String) -> String:
+	if s.is_empty() or s == "…" or Lang.code() == "en":
 		return s
-	var map := {"K": "R", "Q": "D", "R": "T", "B": "F", "N": "C"}
 	var out := ""
 	for i in s.length():
 		var ch := s[i]
-		if map.has(ch) and (i == 0 or s[i - 1] == "="):
-			out += map[ch]
+		if "KQRBN".contains(ch) and (i == 0 or s[i - 1] == "="):
+			out += Lang.san_letter(ch)
 		else:
 			out += ch
 	return out
@@ -664,7 +663,7 @@ func show_promotion(moves: Array) -> void:
 	v.add_child(row)
 	var side := "white" if game.pos.side == ChessPosition.WHITE else "black"
 	var order := [ChessPosition.QUEEN, ChessPosition.ROOK, ChessPosition.BISHOP, ChessPosition.KNIGHT]
-	var keys := {ChessPosition.QUEEN: "Q", ChessPosition.ROOK: "R", ChessPosition.BISHOP: "B", ChessPosition.KNIGHT: "N"} if Lang.is_en() else {ChessPosition.QUEEN: "D", ChessPosition.ROOK: "T", ChessPosition.BISHOP: "F", ChessPosition.KNIGHT: "C"}
+	var keys := {ChessPosition.QUEEN: Lang.san_letter("Q"), ChessPosition.ROOK: Lang.san_letter("R"), ChessPosition.BISHOP: Lang.san_letter("B"), ChessPosition.KNIGHT: Lang.san_letter("N")}
 	var first: Control
 	for pt in order:
 		for m in moves:

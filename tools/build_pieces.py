@@ -48,6 +48,19 @@ def library(path):
     return lib
 
 
+def appearance(p, lib):
+    """The creature's look: its palette ("colors": zone -> colour) and what it wears ("accessories": slot -> item
+    symbol "<type>_<gfx>", slot 1 the hat, 2 the cape), loaded from clips/items into `lib`. Most items export no
+    symbol: the whole file is then the drawing (render.py centres it on the anchor)."""
+    acc = {}
+    for slot, sym in (p.get("accessories") or {}).items():
+        t, g = sym.split("_")
+        sw = lib.add(S.SWF(str(CLIPS / "items" / t / f"{g}.swf")))
+        lib.exports.setdefault(sym, (sw, 0))
+        acc[int(slot)] = sym
+    return R.Appearance(colors={int(k): v for k, v in (p.get("colors") or {}).items()}, accessories=acc)
+
+
 def render_anim(lib, symbol, app, scale, max_frames=MAX_FRAMES, params=None, canvas=(900, 900), origin=(450, 640),
                 supersample=SUPERSAMPLE, attach=None):
     """Two passes: measure where the animation draws (growing the canvas when it touches an edge), then render
@@ -156,7 +169,7 @@ def job_piece(args):
     gfx = p["gfx"]
     lib = library(CLIPS / "sprites" / f"{gfx}.swf")
     exports = lib.swfs[0].exports
-    app = R.Appearance(colors={int(k): v for k, v in (p.get("colors") or {}).items()})
+    app = appearance(p, lib)
     scale = float(p["scale"]) * density
     mirror = False  # measured: the left views of these sprites are drawn apart (IoU 0.4-0.7 against the mirrored right view)
     fps = float(lib.swfs[0].frame_rate) or FPS  # one rendered frame per frame of the clip

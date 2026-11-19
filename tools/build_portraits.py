@@ -56,7 +56,7 @@ def job(args):
     sym = B.resolve(exports, "static", "R") or B.resolve(exports, "walk", "R")
     if not sym:
         return f"{key}: pas d'animation de repos"
-    app = B.R.Appearance(colors={int(k): v for k, v in (p.get("colors") or {}).items()})
+    app = B.appearance(p, lib)
     # measure at a small scale, then render at the scale that fills the portrait
     probe = B.render_anim(lib, sym, app, 2.0, max_frames=1, supersample=1)
     bb = bbox(probe.frames[0])
@@ -80,8 +80,8 @@ def job(args):
 
 def job_art(args):
     key, p = args
-    if p.get("colors"):
-        return f"{key}: recolorée, garde son portrait"
+    if p.get("colors") or p.get("accessories"):
+        return f"{key}: recolorée ou habillée, garde son portrait"
     src = B.CLIPS / "artworks" / "big" / f"{p['gfx']}.swf"
     if not src.exists():
         return f"{key}: pas d'illustration"

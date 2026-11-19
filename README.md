@@ -38,7 +38,7 @@
 - **Two players on one screen**, and up to five player profiles per device, each with its own progress and portrait.
 - **Three sets of pieces**, if you prefer chess pieces to creatures: Bonta against Brâkmar (angels against demons, hand-drawn in the same style) or classic ivory and ebony Staunton pieces, each with its own little animations. Switch at any time with the three buttons at the bottom right of every game, or in the settings.
 - **A real engine:** Stockfish runs inside the game, on every platform, including the browser version.
-- **English and French**, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser the same full-size pictures as on Windows, drawn at your screen's resolution, full screen with F11, and a performance mode for modest computers.
+- **Six languages** (French, English, Spanish, Portuguese, German, Italian), with the creatures' official Dofus names, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser the same full-size pictures as on Windows, drawn at your screen's resolution, full screen with F11, and a performance mode for modest computers.
 
 ## 💾 Install
 

@@ -409,14 +409,15 @@ class Player:
             anchor = args[0] if args else None
             slot = int(to_number(args[1])) if len(args) > 1 else -1
             direction = to_str(args[2]) if len(args) > 2 else "R"
-            if isinstance(anchor, DisplayObject):
-                self._attach_accessory(anchor, slot, direction)
-            # Hat slot passes the head clip: frame 2 is the short-hair variant worn under a hat.
+            # Hat slot passes the head clip: frame 2 is the short-hair variant worn under a hat. Set first: going to
+            # that frame rebuilds the head's children, the hat's anchor among them.
             head = args[3] if len(args) > 3 else None
             if slot == 1 and isinstance(head, DisplayObject) and self.app.accessories.get(1):
                 if head.is_sprite and head.frame_count > 1:
                     self.goto(head, 2)
                     head.playing = False
+            if isinstance(anchor, DisplayObject):
+                self._attach_accessory(anchor, slot, direction)
         elif member in ("applyAnim", "applyEnd"):
             if not self.done:
                 self.done = True
@@ -439,6 +440,11 @@ class Player:
         acc = self.instantiate(swf_obj, cid, anchor, name="accessory")
         if acc is None:
             return
+        if cid == 0:
+            # a whole file (no exported symbol): its drawing sits at the centre of its stage, which the client centres
+            # on the anchor
+            fr = swf_obj.frame_rect
+            acc.matrix = S.Matrix(1.0, 0.0, 0.0, 1.0, -(fr[0] + fr[1]) / 2, -(fr[2] + fr[3]) / 2)
         # accessories sit above the anchor's own content
         anchor.children[100000 + slot] = acc
         if acc.is_sprite:
@@ -453,7 +459,7 @@ class Player:
 
     # -- instance management ---------------------------------------------
     def instantiate(self, swf_obj, cid, parent, name=None):
-        char = swf_obj.characters.get(cid)
+        char = swf_obj.root if cid == 0 else swf_obj.characters.get(cid)  # 0: the file's root timeline (an accessory file without export)
         if char is None:
             # imported symbol: resolve through the library by export name
             for url, m in swf_obj.imports:

@@ -254,7 +254,7 @@
         "Bonta / Brâkmar": "Bonta / Brâkmar",
         "Classiques": "Classic",
         "Pièces": "Pieces",
-        "Pas fan des monstres ? Change de pièces avec les boutons en bas à droite.": "Not fond of the monsters? Change the pieces with the buttons at the bottom right.",
+        "Pas fan des monstres ? Change de pièces en bas à droite.": "Not fond of the monsters? Change the pieces at the bottom right.",
         "Changer de vue : assis, penché, debout… (V)": "Change the view: seated, leaning, standing… (V)",
         "Vue assise": "Seated",
         "Penché sur le plateau": "Leaning over the board",
@@ -271,6 +271,18 @@
         "Tour noire": "Black rook",
         "Fou noir": "Black bishop",
         "Cavalier noir": "Black knight",
-        "Pion noir": "Black pawn"
+        "Pion noir": "Black pawn",
+        "Bouftou Royal": "Royal Gobball",
+        "Tofu Royal": "Royal Tofu",
+        "Tofu en cage": "Tofu in Cage",
+        "Boufcoul": "Gobkool",
+        "Dragodinde Amande": "Almond Dragoturkey",
+        "Boufton Blanc": "White Gobbly",
+        "Brumaire le Saigneur Macabre": "Brumaire the Macabre Bloord",
+        "Jiva la Sage": "Jiva the Wise",
+        "Prisme brâkmarien": "Brakmarian Prism",
+        "Pandawa Ivre": "Drunken Pandawa",
+        "Dragodinde Ébène": "Ebony Dragoturkey",
+        "Arakne": "Arachnee"
     }
 }

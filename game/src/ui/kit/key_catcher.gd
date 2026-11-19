@@ -1,5 +1,5 @@
 extends Node
-## Presses the button whose "key" meta matches a typed letter (promotion: D, T, F, C).
+## Presses the button whose "key" meta matches a typed letter (promotion: the piece letters of the current language).
 
 var buttons: Array = []
 
