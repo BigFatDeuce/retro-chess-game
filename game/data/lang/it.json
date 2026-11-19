@@ -81,7 +81,7 @@
         "sans la vie autour du plateau ni la transparence des pièces, avec moins d'animations dans l'interface.": "senza la vita intorno alla scacchiera né la trasparenza dei pezzi, e con meno animazioni nell'interfaccia.",
         "Réduire les animations": "Riduci le animazioni",
         "Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ": "I movimenti e gli attacchi delle creature mantengono la velocità scelta in «Gioco». ",
-        "Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir.": "Tastiera: frecce e Invio; controller: croce direzionale e A; Esc o B per tornare indietro.",
+        "Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir.": "Tastiera: frecce e Invio; controller: levetta sinistra per il cursore e A per cliccare, croce direzionale per passare da un pulsante all'altro; Esc o B per tornare indietro.",
         "Économie d'énergie": "Risparmio energetico",
         "À toi de jouer": "Tocca a te",
         "Aux blancs de jouer": "Muove il bianco",
@@ -283,6 +283,15 @@
         "Prisme brâkmarien": "Prisma brakmariano",
         "Pandawa Ivre": "Pandawa Ubriaco",
         "Dragodinde Ébène": "Dragacchino Ebano",
-        "Arakne": "Arakne"
+        "Arakne": "Arakne",
+        "Roque impossible : le roi ou cette tour a déjà bougé.": "Arrocco impossibile: il re o questa torre si è già mosso.",
+        "Roque impossible : des pièces sont entre le roi et la tour.": "Arrocco impossibile: ci sono pezzi tra il re e la torre.",
+        "Roque impossible : ton roi est en échec.": "Arrocco impossibile: il tuo re è sotto scacco.",
+        "Roque impossible : le roi passerait par %s, une case attaquée.": "Arrocco impossibile: il re passerebbe per %s, una casa attaccata.",
+        "Ton roi est en échec : ce coup ne le protège pas.": "Il tuo re è sotto scacco: questa mossa non lo protegge.",
+        "Ce coup mettrait ton roi en échec.": "Questa mossa metterebbe il tuo re sotto scacco.",
+        "Cette pièce est clouée : la bouger exposerait ton roi.": "Questo pezzo è inchiodato: muoverlo esporrebbe il tuo re.",
+        "Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).": "Il tuo re non può muoversi: le case libere intorno a lui sono attaccate (%s).",
+        "Ton roi est en échec : cette pièce ne peut pas le protéger.": "Il tuo re è sotto scacco: questo pezzo non può proteggerlo."
     }
 }

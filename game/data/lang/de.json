@@ -81,7 +81,7 @@
         "sans la vie autour du plateau ni la transparence des pièces, avec moins d'animations dans l'interface.": "ohne das Leben rund ums Brett und ohne durchscheinende Figuren, mit weniger Animationen in der Oberfläche.",
         "Réduire les animations": "Animationen reduzieren",
         "Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ": "Bewegungen und Angriffe der Kreaturen behalten das unter „Spiel“ eingestellte Tempo. ",
-        "Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir.": "Tastatur: Pfeiltasten und Enter; Controller: Steuerkreuz und A; Esc oder B zum Zurückgehen.",
+        "Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir.": "Tastatur: Pfeiltasten und Enter; Controller: linker Stick für den Cursor und A zum Klicken, Steuerkreuz von Knopf zu Knopf; Esc oder B zum Zurückgehen.",
         "Économie d'énergie": "Energiesparmodus",
         "À toi de jouer": "Du bist am Zug",
         "Aux blancs de jouer": "Weiß am Zug",
@@ -283,6 +283,15 @@
         "Prisme brâkmarien": "Brâkmar-Prisma",
         "Pandawa Ivre": "Betrunkener Pandawa",
         "Dragodinde Ébène": "Ebenholz-Dracotruter",
-        "Arakne": "Arachnee"
+        "Arakne": "Arachnee",
+        "Roque impossible : le roi ou cette tour a déjà bougé.": "Rochade unmöglich: Der König oder dieser Turm hat schon gezogen.",
+        "Roque impossible : des pièces sont entre le roi et la tour.": "Rochade unmöglich: Zwischen König und Turm stehen Figuren.",
+        "Roque impossible : ton roi est en échec.": "Rochade unmöglich: Dein König steht im Schach.",
+        "Roque impossible : le roi passerait par %s, une case attaquée.": "Rochade unmöglich: Der König müsste über %s, ein angegriffenes Feld.",
+        "Ton roi est en échec : ce coup ne le protège pas.": "Dein König steht im Schach: Dieser Zug schützt ihn nicht.",
+        "Ce coup mettrait ton roi en échec.": "Dieser Zug würde deinen König ins Schach stellen.",
+        "Cette pièce est clouée : la bouger exposerait ton roi.": "Diese Figur ist gefesselt: Sie zu ziehen würde deinen König ungedeckt lassen.",
+        "Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).": "Dein König kann nicht ziehen: Die freien Felder um ihn herum werden angegriffen (%s).",
+        "Ton roi est en échec : cette pièce ne peut pas le protéger.": "Dein König steht im Schach: Diese Figur kann ihn nicht schützen."
     }
 }

@@ -81,7 +81,7 @@
         "sans la vie autour du plateau ni la transparence des pièces, avec moins d'animations dans l'interface.": "sin la vida alrededor del tablero ni la transparencia de las piezas, y con menos animaciones en la interfaz.",
         "Réduire les animations": "Reducir las animaciones",
         "Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ": "Los movimientos y ataques de las criaturas mantienen la velocidad elegida en «Juego». ",
-        "Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir.": "Teclado: flechas e Intro; mando: cruceta y A; Esc o B para volver.",
+        "Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir.": "Teclado: flechas e Intro; mando: stick izquierdo para el cursor y A para hacer clic, cruceta para pasar de un botón a otro; Esc o B para volver.",
         "Économie d'énergie": "Ahorro de energía",
         "À toi de jouer": "Te toca",
         "Aux blancs de jouer": "Juegan las blancas",
@@ -283,6 +283,15 @@
         "Prisme brâkmarien": "Prisma brakmariano",
         "Pandawa Ivre": "Pandawa Borracho",
         "Dragodinde Ébène": "Dragopavo Ébano",
-        "Arakne": "Arakna"
+        "Arakne": "Arakna",
+        "Roque impossible : le roi ou cette tour a déjà bougé.": "Enroque imposible: el rey o esta torre ya se ha movido.",
+        "Roque impossible : des pièces sont entre le roi et la tour.": "Enroque imposible: hay piezas entre el rey y la torre.",
+        "Roque impossible : ton roi est en échec.": "Enroque imposible: tu rey está en jaque.",
+        "Roque impossible : le roi passerait par %s, une case attaquée.": "Enroque imposible: el rey pasaría por %s, una casilla atacada.",
+        "Ton roi est en échec : ce coup ne le protège pas.": "Tu rey está en jaque: esta jugada no lo protege.",
+        "Ce coup mettrait ton roi en échec.": "Esta jugada pondría a tu rey en jaque.",
+        "Cette pièce est clouée : la bouger exposerait ton roi.": "Esta pieza está clavada: moverla expondría a tu rey.",
+        "Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).": "Tu rey no puede moverse: las casillas libres a su alrededor están atacadas (%s).",
+        "Ton roi est en échec : cette pièce ne peut pas le protéger.": "Tu rey está en jaque: esta pieza no puede protegerlo."
     }
 }

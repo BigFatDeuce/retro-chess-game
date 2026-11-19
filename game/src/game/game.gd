@@ -9,6 +9,7 @@ signal turn_changed(side: int)
 signal promotion_needed(moves: Array)
 signal see_through_changed(on: bool)
 signal move_made(san: String)  ## after each move is staged and applied (history, saves)
+signal move_refused(text: String)  ## why the move tried (or the piece picked) is not allowed, translated
 
 const PIECE_ROLES := {ChessPosition.PAWN: "pawn", ChessPosition.KNIGHT: "knight", ChessPosition.BISHOP: "bishop",
 	ChessPosition.ROOK: "rook", ChessPosition.QUEEN: "queen", ChessPosition.KING: "king"}
@@ -303,6 +304,10 @@ func _on_square_clicked(sq: int) -> void:
 			else:
 				play_move(options[0])
 			return
+		var why := _refusal(_selected, sq)
+		if why != "":
+			move_refused.emit(why)
+			return
 	if p != ChessPosition.EMPTY and ChessPosition.piece_color(p) == pos.side:
 		if sq == _selected:
 			_clear_selection()
@@ -329,8 +334,72 @@ func _on_square_clicked(sq: int) -> void:
 		board.targets = t
 		board.capture_targets = caps
 		board.queue_redraw()
+		if _sel_moves.is_empty():
+			var why := _stuck(sq)
+			if why != "":
+				move_refused.emit(why)
 	else:
 		_clear_selection()
+
+
+## Why the selected piece cannot go to `to` ("" when it simply does not move that way): castling refused, or a move
+## that would leave the own king in check.
+func _refusal(from: int, to: int) -> String:
+	var us := pos.side
+	var p := pos.board[from]
+	if ChessPosition.piece_type(p) == ChessPosition.KING and from == (4 if us == ChessPosition.WHITE else 60):
+		var own_rook := ChessPosition.make_piece(ChessPosition.ROOK, us)
+		if to == from + 2 or (to == from + 3 and pos.board[to] == own_rook):
+			return _castle_refusal(from, true)
+		if to == from - 2 or (to == from - 4 and pos.board[to] == own_rook):
+			return _castle_refusal(from, false)
+	if pos.board[to] != ChessPosition.EMPTY and ChessPosition.piece_color(pos.board[to]) == us:
+		return ""
+	for m in pos.pseudo_moves():
+		if ChessPosition.move_from(m) == from and ChessPosition.move_to(m) == to:
+			if pos.in_check():
+				return Lang.t("Ton roi est en échec : ce coup ne le protège pas.")
+			if ChessPosition.piece_type(p) == ChessPosition.KING:
+				return Lang.t("Ce coup mettrait ton roi en échec.")
+			return Lang.t("Cette pièce est clouée : la bouger exposerait ton roi.")
+	return ""
+
+
+func _castle_refusal(ksq: int, king_side: bool) -> String:
+	var us := pos.side
+	var flag: int
+	if us == ChessPosition.WHITE:
+		flag = ChessPosition.CASTLE_WK if king_side else ChessPosition.CASTLE_WQ
+	else:
+		flag = ChessPosition.CASTLE_BK if king_side else ChessPosition.CASTLE_BQ
+	if not pos.castling & flag:
+		return Lang.t("Roque impossible : le roi ou cette tour a déjà bougé.")
+	for s in ([ksq + 1, ksq + 2] if king_side else [ksq - 1, ksq - 2, ksq - 3]):
+		if pos.board[s] != ChessPosition.EMPTY:
+			return Lang.t("Roque impossible : des pièces sont entre le roi et la tour.")
+	if pos.in_check():
+		return Lang.t("Roque impossible : ton roi est en échec.")
+	for s in ([ksq + 1, ksq + 2] if king_side else [ksq - 1, ksq - 2]):
+		if pos.is_square_attacked(s, 1 - us):
+			return Lang.f("Roque impossible : le roi passerait par %s, une case attaquée.", [ChessPosition.sq_name(s)])
+	return ""
+
+
+## Why a piece of the side to move has no move at all ("" when it is only hemmed in by its own pieces).
+func _stuck(sq: int) -> String:
+	var tos: Array[String] = []
+	for m in pos.pseudo_moves():
+		if ChessPosition.move_from(m) == sq and not ChessPosition.move_flags(m) & ChessPosition.FLAG_CASTLE:
+			var n := ChessPosition.sq_name(ChessPosition.move_to(m))
+			if not n in tos:
+				tos.append(n)
+	if tos.is_empty():
+		return ""
+	if ChessPosition.piece_type(pos.board[sq]) == ChessPosition.KING:
+		return Lang.f("Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).", [", ".join(tos)])
+	if pos.in_check():
+		return Lang.t("Ton roi est en échec : cette pièce ne peut pas le protéger.")
+	return Lang.t("Cette pièce est clouée : la bouger exposerait ton roi.")
 
 
 func _clear_selection() -> void:

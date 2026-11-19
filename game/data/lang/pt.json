@@ -81,7 +81,7 @@
         "sans la vie autour du plateau ni la transparence des pièces, avec moins d'animations dans l'interface.": "sem a vida ao redor do tabuleiro nem a transparência das peças, e com menos animações na interface.",
         "Réduire les animations": "Reduzir as animações",
         "Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ": "Os movimentos e ataques das criaturas mantêm a velocidade escolhida em “Jogo”. ",
-        "Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir.": "Teclado: setas e Enter; controle: direcional e A; Esc ou B para voltar.",
+        "Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir.": "Teclado: setas e Enter; controle: analógico esquerdo para o cursor e A para clicar, direcional para passar de um botão a outro; Esc ou B para voltar.",
         "Économie d'énergie": "Economia de energia",
         "À toi de jouer": "Sua vez",
         "Aux blancs de jouer": "Vez das brancas",
@@ -283,6 +283,15 @@
         "Prisme brâkmarien": "Prisma Brakmariano",
         "Pandawa Ivre": "Pandawa Eufórico",
         "Dragodinde Ébène": "Dragossauro Ébano",
-        "Arakne": "Arakne"
+        "Arakne": "Arakne",
+        "Roque impossible : le roi ou cette tour a déjà bougé.": "Roque impossível: o rei ou esta torre já se moveu.",
+        "Roque impossible : des pièces sont entre le roi et la tour.": "Roque impossível: há peças entre o rei e a torre.",
+        "Roque impossible : ton roi est en échec.": "Roque impossível: seu rei está em xeque.",
+        "Roque impossible : le roi passerait par %s, une case attaquée.": "Roque impossível: o rei passaria por %s, uma casa atacada.",
+        "Ton roi est en échec : ce coup ne le protège pas.": "Seu rei está em xeque: este lance não o protege.",
+        "Ce coup mettrait ton roi en échec.": "Este lance colocaria seu rei em xeque.",
+        "Cette pièce est clouée : la bouger exposerait ton roi.": "Esta peça está cravada: movê-la exporia seu rei.",
+        "Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).": "Seu rei não pode se mover: as casas livres ao redor dele estão atacadas (%s).",
+        "Ton roi est en échec : cette pièce ne peut pas le protéger.": "Seu rei está em xeque: esta peça não pode protegê-lo."
     }
 }

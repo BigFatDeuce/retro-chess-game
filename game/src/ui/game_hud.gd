@@ -135,6 +135,7 @@ func setup(p_game: ChessGame, _a := "", _b := "") -> void:
 		Ui.toast(_root, Lang.t("Transparence activée" if on else "Transparence désactivée"), "eye_off" if not on else "eye"))
 	game.turn_changed.connect(_on_turn)
 	game.promotion_needed.connect(show_promotion)
+	game.move_refused.connect(func(text: String) -> void: Ui.toast(_root, text, "info", 2.6))
 	game.move_made.connect(_on_move)
 	get_viewport().size_changed.connect(_relayout)
 	_relayout.call_deferred()

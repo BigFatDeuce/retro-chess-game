@@ -81,7 +81,7 @@
         "sans la vie autour du plateau ni la transparence des pièces, avec moins d'animations dans l'interface.": "without the life around the board or see-through pieces, and with fewer interface animations.",
         "Réduire les animations": "Reduce animations",
         "Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ": "Creature moves and attacks keep the speed set in “Game”. ",
-        "Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir.": "Keyboard: arrows and Enter; controller: D-pad and A; Esc or B to go back.",
+        "Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir.": "Keyboard: arrows and Enter; gamepad: left stick for the cursor and A to click, d-pad to go from button to button; Esc or B to go back.",
         "Économie d'énergie": "Power saving",
         "À toi de jouer": "Your move",
         "Aux blancs de jouer": "White to move",
@@ -283,6 +283,15 @@
         "Prisme brâkmarien": "Brakmarian Prism",
         "Pandawa Ivre": "Drunken Pandawa",
         "Dragodinde Ébène": "Ebony Dragoturkey",
-        "Arakne": "Arachnee"
+        "Arakne": "Arachnee",
+        "Roque impossible : le roi ou cette tour a déjà bougé.": "Can't castle: the king or this rook has already moved.",
+        "Roque impossible : des pièces sont entre le roi et la tour.": "Can't castle: there are pieces between the king and the rook.",
+        "Roque impossible : ton roi est en échec.": "Can't castle: your king is in check.",
+        "Roque impossible : le roi passerait par %s, une case attaquée.": "Can't castle: the king would pass through %s, an attacked square.",
+        "Ton roi est en échec : ce coup ne le protège pas.": "Your king is in check: this move doesn't protect it.",
+        "Ce coup mettrait ton roi en échec.": "This move would put your king in check.",
+        "Cette pièce est clouée : la bouger exposerait ton roi.": "This piece is pinned: moving it would expose your king.",
+        "Ton roi ne peut pas bouger : les cases libres autour de lui sont attaquées (%s).": "Your king can't move: the free squares around it are attacked (%s).",
+        "Ton roi est en échec : cette pièce ne peut pas le protéger.": "Your king is in check: this piece can't protect it."
     }
 }

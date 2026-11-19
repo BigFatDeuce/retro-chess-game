@@ -128,7 +128,7 @@ func _show(tab: String) -> void:
 			_switch("reduce_motion", "sparkle", "Réduire les animations de l'interface")
 			_switch("see_through", "eye", "Pièces cachées en transparence")
 			var note := Ui.para(Lang.t("Les déplacements et attaques des créatures gardent leur vitesse réglée dans « Jeu ». ") +
-				Lang.t("Au clavier : flèches et Entrée ; à la manette : croix et A ; Échap ou B pour revenir."), 1380, "Dim")
+				Lang.t("Au clavier : flèches et Entrée ; à la manette : stick gauche pour le curseur et A pour cliquer, croix pour passer d'un bouton à l'autre ; Échap ou B pour revenir."), 1380, "Dim")
 			_content.add_child(note)
 	Ui.stagger(_content.get_children(), 0.035)
 
