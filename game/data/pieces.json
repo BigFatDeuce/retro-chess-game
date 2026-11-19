@@ -1,106 +1,199 @@
 {
   "_doc": "Composition des deux armées. Une entrée par camp et par rôle. gfx = sprite de la bibliothèque locale ; colors = palette d'origine (zones 1-3, absentes = couleurs du sprite) ; scale = échelle à l'écran sur la rangée avant du plateau (mise en page 2560x1440, case de 210 px ; hiérarchie lisible : pion petit, roi et dame grands ; recuit sans perte à scale x densité). attacks.melee : prise sur une case voisine (la pièce s'approche puis frappe). attacks.ranged : prise à distance (sort à projectile ou charge) ; absent = la pièce s'approche et utilise melee. spell = nom du sort réel de la créature, anim = animation de lancement, fx = effet visuel du sort (null = aucun). highlight = animation des moments forts (échec, mat, promotion).",
-  "roles": ["king", "queen", "rook", "bishop", "knight", "pawn"],
+  "roles": [
+    "king",
+    "queen",
+    "rook",
+    "bishop",
+    "knight",
+    "pawn"
+  ],
   "fx": {
     "_doc": "Clips d'effet des sorts (bibliothèque locale, clips/spells). mode at_target = joué autour de la cible ; beam = rayon du lanceur vers la cible (longueur ajustée) ; arc = projectile en cloche (partie flight) puis impact. scale = échelle du lanceur.",
-    "2008": {"mode": "at_target", "scale": 4.7},
-    "2012": {"mode": "arc", "flight": "move", "impact": "fumee", "scale": 4.3},
-    "2001": {"mode": "beam", "scale": 5.8}
+    "2008": {
+      "mode": "at_target",
+      "scale": 4.7
+    },
+    "2012": {
+      "mode": "arc",
+      "flight": "move",
+      "impact": "fumee",
+      "scale": 4.3
+    },
+    "2001": {
+      "mode": "beam",
+      "scale": 5.8
+    }
   },
   "sides": {
     "white": {
       "king": {
-        "name": "Dragoss Blanc Éveillé", "gfx": 1340, "colors": {"1": 6070879}, "scale": 4.7,
+        "name": "Bouftou Royal",
+        "gfx": 1574,
+        "scale": 4.8,
         "attacks": {
-          "melee": {"spell": "Souffle du Dragoss", "anim": "anim0", "fx": null},
-          "ranged": {"spell": "Météorite Etourdissante", "anim": "anim2", "fx": 2008, "mode": "at_target"}
+          "melee": {
+            "spell": "Morsure du Bouftou",
+            "anim": "anim0",
+            "fx": null
+          }
         },
-        "highlight": "anim1"
+        "highlight": "bonus"
       },
       "queen": {
-        "name": "Guerrier ailé", "gfx": 1701, "scale": 4.7,
+        "name": "Tofu Royal",
+        "gfx": 1151,
+        "scale": 4.5,
         "attacks": {
-          "melee": {"spell": "Coup de lame", "anim": "anim2", "fx": null},
-          "ranged": {"spell": "Estocade", "anim": "anim3", "fx": null, "mode": "charge"}
+          "melee": {
+            "spell": "Ecrasement Royal",
+            "anim": "anim1",
+            "fx": null
+          }
         },
-        "highlight": "anim1"
+        "highlight": "anim2"
       },
       "rook": {
-        "name": "Craqueleur des plaines", "gfx": 1049, "scale": 3.3,
+        "name": "Tofu en cage",
+        "gfx": 1377,
+        "scale": 7.0,
         "attacks": {
-          "melee": {"spell": "Ecrasement", "anim": "anim0", "fx": null},
-          "ranged": {"spell": "Jet de pierre", "anim": "anim2", "fx": 2012, "mode": "arc"}
+          "melee": {
+            "spell": "Secousse",
+            "anim": "anim0",
+            "fx": null
+          }
         },
         "highlight": "anim1"
       },
       "bishop": {
-        "name": "Wabbit", "gfx": 1050, "scale": 5.8,
+        "name": "Boufcoul",
+        "gfx": 1355,
+        "scale": 6.4,
         "attacks": {
-          "melee": {"spell": "Frappe", "anim": "anim0", "fx": null}
+          "melee": {
+            "spell": "Morsure du Bouftou",
+            "anim": "anim0",
+            "fx": null
+          }
         },
         "highlight": "bonus"
       },
       "knight": {
-        "name": "Chevaucheur Koalak", "gfx": 1381, "scale": 3.5,
-        "attacks": {
-          "melee": {"spell": "Choc Frontal", "anim": "anim0", "fx": null}
+        "name": "Dragodinde Amande",
+        "gfx": 1108,
+        "colors": {
+          "1": 16772045,
+          "2": 16301825,
+          "3": 16772045
         },
-        "highlight": "anim1"
+        "scale": 3.4,
+        "attacks": {
+          "melee": {
+            "spell": "Coup de Tête",
+            "anim": "anim0",
+            "fx": null
+          }
+        },
+        "highlight": "bonus"
       },
       "pawn": {
-        "name": "Boufton Blanc", "gfx": 1570, "scale": 5.2,
+        "name": "Boufton Blanc",
+        "gfx": 1570,
+        "scale": 5.2,
         "attacks": {
-          "melee": {"spell": "Mordillement", "anim": "anim0", "fx": null}
+          "melee": {
+            "spell": "Mordillement",
+            "anim": "anim0",
+            "fx": null
+          }
         },
         "highlight": "anim1"
       }
     },
     "black": {
       "king": {
-        "name": "Dragoss Noir Éveillé", "gfx": 1340, "colors": {"1": 5132857, "2": 14823196, "3": 12613643}, "scale": 4.7,
+        "name": "Brumaire le Saigneur Macabre",
+        "gfx": 8016,
+        "scale": 4.4,
         "attacks": {
-          "melee": {"spell": "Souffle du Dragoss", "anim": "anim0", "fx": null},
-          "ranged": {"spell": "Météorite Etourdissante", "anim": "anim2", "fx": 2008, "mode": "at_target"}
+          "melee": {
+            "spell": "Fureur de Brumaire",
+            "anim": "anim0",
+            "fx": null
+          }
         },
-        "highlight": "anim1"
+        "highlight": "bonus"
       },
       "queen": {
-        "name": "Guerrier ailé noir", "gfx": 1700, "scale": 4.7,
+        "name": "Jiva la Sage",
+        "gfx": 8023,
+        "scale": 5.1,
         "attacks": {
-          "melee": {"spell": "Coup de lame", "anim": "anim2", "fx": null},
-          "ranged": {"spell": "Estocade", "anim": "anim3", "fx": null, "mode": "charge"}
+          "melee": {
+            "spell": "Eclats glacés de Jiva",
+            "anim": "anim0",
+            "fx": null
+          }
         },
         "highlight": "anim1"
       },
       "rook": {
-        "name": "Craqueleur", "gfx": 1008, "scale": 4.3,
+        "name": "Prisme brâkmarien",
+        "gfx": 8100,
+        "scale": 4.0,
         "attacks": {
-          "melee": {"spell": "Ecrasement", "anim": "anim0", "fx": null},
-          "ranged": {"spell": "Jet de pierre", "anim": "anim2", "fx": 2012, "mode": "arc"}
+          "melee": {
+            "spell": "Décharge du Prisme",
+            "anim": "anim1",
+            "fx": null
+          }
         },
-        "highlight": "anim1"
+        "highlight": "anim2"
       },
       "bishop": {
-        "name": "Black Wabbit", "gfx": 1051, "scale": 5.8,
+        "name": "Pandawa Ivre",
+        "gfx": 1731,
+        "scale": 5.0,
         "attacks": {
-          "melee": {"spell": "Frappe", "anim": "anim0", "fx": null},
-          "ranged": {"spell": "Wabehameha", "anim": "anim1", "fx": 2001, "mode": "beam"}
+          "melee": {
+            "spell": "Poing Enflammé",
+            "anim": "anim1",
+            "fx": null
+          }
+        },
+        "highlight": "anim5"
+      },
+      "knight": {
+        "name": "Dragodinde Ébène",
+        "gfx": 1108,
+        "colors": {
+          "1": 1245184,
+          "2": 393216,
+          "3": 1245184
+        },
+        "scale": 3.4,
+        "attacks": {
+          "melee": {
+            "spell": "Coup de Tête",
+            "anim": "anim0",
+            "fx": null
+          }
         },
         "highlight": "bonus"
       },
-      "knight": {
-        "name": "Drakoalak", "gfx": 1440, "scale": 3.7,
-        "attacks": {
-          "melee": {"spell": "Coup de Tête", "anim": "anim0", "fx": null}
-        },
-        "highlight": "anim1"
-      },
       "pawn": {
-        "name": "Boufton Noir", "gfx": 1571, "scale": 5.2,
+        "name": "Arakne",
+        "gfx": 1564,
+        "scale": 6.9,
         "attacks": {
-          "melee": {"spell": "Mordillement", "anim": "anim0", "fx": null}
+          "melee": {
+            "spell": "Frappe",
+            "anim": "anim0",
+            "fx": null
+          }
         },
-        "highlight": "anim1"
+        "highlight": "bonus"
       }
     }
   }

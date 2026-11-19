@@ -100,7 +100,7 @@
      "aggression": 0.8
     }
    },
-   "avatar": "black_bishop",
+   "avatar": "black_queen",
    "intro": "Ses attaques surgissent de la brume, sans prévenir."
   },
   {
@@ -113,7 +113,7 @@
     "uci_elo": 1500,
     "movetime": 400
    },
-   "avatar": "black_queen",
+   "avatar": "black_bishop",
    "intro": "Froid et méthodique, il ne laisse rien passer."
   },
   {

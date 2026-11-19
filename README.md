@@ -33,10 +33,10 @@
 - **Free play:** from the start, pick any board and any strength from 600 to 2800 Elo.
 - **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
-- **Animated armies:** every move is a walk, every capture a fight, with ranged pieces that shoot from afar.
-- **Look closer:** zoom and pan around the board, or hold the right mouse button and drag up to stand up and look down on it, so no piece hides behind another.
+- **Animated armies:** the Bouftou Royal, the Tofu Royal and their friends against Brumaire, Jiva la Sage and the Pandawa Ivre. Every move is a walk, every capture a fight, and resting the mouse on a piece tells its name.
+- **Look closer:** zoom and pan around the board, hold the right mouse button and drag up to stand up and look down on it, or press the view button (V) to go from seated to leaning to standing, so no piece hides behind another.
 - **Two players on one screen**, and up to five player profiles per device, each with its own progress and portrait.
-- **Three sets of pieces**, if you prefer chess pieces to creatures: Bonta against Brâkmar (angels against demons, hand-drawn in the same style) or classic ivory and ebony Staunton pieces, each with its own little animations. Pick them in the settings or from the note of the first boards.
+- **Three sets of pieces**, if you prefer chess pieces to creatures: Bonta against Brâkmar (angels against demons, hand-drawn in the same style) or classic ivory and ebony Staunton pieces, each with its own little animations. Switch at any time with the three buttons at the bottom right of every game, or in the settings.
 - **A real engine:** Stockfish runs inside the game, on every platform, including the browser version.
 - **English and French**, mouse, keyboard or touch, an animated glove cursor in four sizes, F11 for full screen, a frame-rate cap that saves battery, and in the browser the same full-size pictures as on Windows, drawn at your screen's resolution, full screen with F11, and a performance mode for modest computers.
 

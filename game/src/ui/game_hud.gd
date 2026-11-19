@@ -57,15 +57,38 @@ func setup(p_game: ChessGame, _a := "", _b := "") -> void:
 	# actions
 	_actions = Ui.hbox(Pal.S2, BoxContainer.ALIGNMENT_END)
 	_right.add_child(_actions)
-	var px := 124.0 if Pal.touch() else 104.0
+	var px := 104.0 if Pal.touch() else 80.0
 	var acts := [["pause", "Pause (Échap)", show_pause], ["eye", "Transparence des pièces cachées (F1)", func() -> void: game.set_see_through(not game.see_through)],
-		["target", "Recentrer la vue (Origine) · clic droit glissé vers le haut : se lever pour voir le plateau", func() -> void: game.camera.reset()], ["scroll", "Historique des coups (H)", toggle_history]]
+		["target", "Recentrer la vue (Origine) · clic droit glissé vers le haut : se lever pour voir le plateau", func() -> void:
+			_view_i = 0
+			game.camera.reset()],
+		["map", "Changer de vue : assis, penché, debout… (V)", next_view], ["scroll", "Historique des coups (H)", toggle_history]]
 	for a in acts:
 		var b := FxButton.make("", "IconButton", a[0], Vector2(px, px))
 		b.tooltip_text = a[1]
 		b.focus_mode = Control.FOCUS_NONE
 		b.pressed.connect(a[2])
 		_actions.add_child(b)
+	# the sets of pieces, at the bottom right
+	_sets = Ui.piece_set_picker(40.0, Callable(), false, true)  # a column: the board's corner leaves little width
+	_sets.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for b in _sets.get_children():
+		b.focus_mode = Control.FOCUS_NONE
+	_root.add_child(_sets)
+	# the name of the piece under the mouse
+	_ptip = Ui.panel("Plate")
+	_ptip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ptip.visible = false
+	_ptip.z_index = 5
+	var pv := Ui.vbox(2)
+	pv.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ptip.add_child(pv)
+	_ptip_name = Ui.label("", "", Pal.FS_SMALL)
+	_ptip_name.add_theme_color_override("font_color", Pal.GOLD_HI)
+	pv.add_child(_ptip_name)
+	_ptip_role = Ui.label("", "", Pal.FS_SMALL - 6)
+	pv.add_child(_ptip_role)
+	_root.add_child(_ptip)
 	# history
 	_history_panel = Ui.panel("Parchment")
 	_history_panel.custom_minimum_size = Vector2(420, 0)
@@ -153,10 +176,76 @@ func _relayout() -> void:
 	_right.offset_top = Pal.EDGE
 	_right.offset_left = -Pal.EDGE - _right.get_combined_minimum_size().x
 	_history_panel.visible = _wide and bool(_history_panel.get_meta("open", true))
+	var m := _sets.get_combined_minimum_size()
+	_sets.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	_sets.offset_right = -Pal.EDGE
+	_sets.offset_bottom = -Pal.EDGE
+	_sets.offset_left = -Pal.EDGE - m.x
+	_sets.offset_top = -Pal.EDGE - m.y
 
+
+## The views, from seated to standing (the "map" button and V cycle through them): [name, tilt, zoom].
+const VIEWS := [["Vue assise", 0.0, 1.0], ["Penché sur le plateau", 0.45, 1.12], ["Debout", 1.0, 1.0],
+	["Debout, de près", 0.7, 1.3]]
+var _view_i := 0
+var _sets: BoxContainer  ## the three sets of pieces, bottom right
+var _ptip: PanelContainer  ## the name of the piece under the mouse
+var _ptip_name: Label
+var _ptip_role: Label
+var _ptip_sq := -1
+var _ptip_t := 0.0
+const PTIP_DELAY := 0.45  ## s the mouse rests on a piece before its name shows
+const ROLE_NAMES := {
+	"white": {"king": "Roi blanc", "queen": "Dame blanche", "rook": "Tour blanche", "bishop": "Fou blanc",
+		"knight": "Cavalier blanc", "pawn": "Pion blanc"},
+	"black": {"king": "Roi noir", "queen": "Dame noire", "rook": "Tour noire", "bishop": "Fou noir",
+		"knight": "Cavalier noir", "pawn": "Pion noir"}}
+
+
+func next_view() -> void:
+	_view_i = (_view_i + 1) % VIEWS.size()
+	var v: Array = VIEWS[_view_i]
+	game.camera.target_tilt = float(v[1])
+	game.camera.target_zoom = float(v[2])
+	game.camera.target_pos = BoardCamera.HOME
+	Ui.toast(_root, Lang.t(String(v[0])), "map", 1.0)
+
+
+## The piece under the mouse, named after a short rest (the creature's own name, then its chess role).
+func _update_piece_tip(delta: float) -> void:
+	if _ptip == null or Pal.touch():
+		return
+	var sq := -1
+	var b := game.board
+	if visible and b and b.input_enabled and not (_pause and is_instance_valid(_pause)) and get_viewport().gui_get_hovered_control() == null:
+		sq = b.hover
+	var p: Piece = game.pieces.get(sq) if sq >= 0 else null
+	if p == null or not is_instance_valid(p):
+		_ptip.visible = false
+		_ptip_sq = -1
+		return
+	if sq != _ptip_sq:
+		_ptip_sq = sq
+		_ptip_t = 0.0
+		_ptip.visible = false
+	_ptip_t += delta
+	if _ptip_t < PTIP_DELAY:
+		return
+	var role := Lang.t(String(ROLE_NAMES[p.side][p.role]))
+	var nm := "" if Atlas.still_pieces() else String(p.def.get("name", ""))
+	_ptip_name.text = nm if nm != "" else role
+	_ptip_role.text = role
+	_ptip_role.visible = nm != ""
+	_ptip.reset_size()
+	var vs := _root.get_viewport_rect().size
+	var at := _root.get_local_mouse_position() + Vector2(30, 34)
+	at.x = minf(at.x, vs.x - _ptip.size.x - 8)
+	at.y = minf(at.y, vs.y - _ptip.size.y - 8)
+	_ptip.position = at
+	_ptip.visible = true
 
 const HISTORY_H := 340.0  ## the moves list's height (it scrolls); shorter while the note of the first boards shows
-const HISTORY_H_TIP := 60.0
+const HISTORY_H_TIP := 150.0
 var _tip: PanelContainer  ## the first boards: "not fond of the monsters?" with the three sets of pieces
 
 
@@ -168,7 +257,8 @@ func _close_tip() -> void:
 
 
 ## The first boards of the ladder: a small note at the top right offering the other sets of pieces instead of the
-## creatures (three buttons, a cross to close it). Once a set is picked there, the note is never shown again.
+## creatures: it points at the sets' buttons at the bottom right (a cross closes it). Once a set is picked, it is
+## never shown again.
 func pieces_tip(show: bool) -> void:
 	_close_tip()
 	if not show or not bool(Settings.get_value("pieces_tip")):
@@ -181,16 +271,11 @@ func pieces_tip(show: bool) -> void:
 	_tip.add_child(v)
 	var h := Ui.hbox(Pal.S2)
 	v.add_child(h)
-	var txt := Ui.label("Pas fan des monstres ? Choisis tes pièces :", "", Pal.FS_SMALL - 4)
+	var txt := Ui.label("Pas fan des monstres ? Change de pièces en bas à droite.", "", Pal.FS_SMALL - 4)
 	txt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	txt.custom_minimum_size = Vector2(280, 0)  # a fixed width: the column stays as wide as the history
 	txt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(txt)
-	var picker := Ui.piece_set_picker(48.0, func(_key: String) -> void:
-		Settings.set_value("pieces_tip", false), false)  # the player knows where it is now: not shown again
-	for b in picker.get_children():
-		b.focus_mode = Control.FOCUS_NONE
-	v.add_child(picker)
 	var x := FxButton.make("", "IconButton", "close", Vector2(56, 56))
 	x.focus_mode = Control.FOCUS_NONE
 	x.tooltip_text = Lang.t("Fermer")
@@ -390,6 +475,8 @@ func _set_banner(text: String, icon: String, danger: bool) -> void:
 
 
 func _process(delta: float) -> void:
+	if game:
+		_update_piece_tip(delta)
 	if game == null or game.over or game.is_human_turn():
 		return
 	_think_t += delta
@@ -548,6 +635,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_H:
 		toggle_history()
+		get_viewport().set_input_as_handled()
+	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V:
+		next_view()
 		get_viewport().set_input_as_handled()
 
 

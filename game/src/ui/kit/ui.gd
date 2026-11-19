@@ -304,8 +304,8 @@ const _EscCatcher := preload("res://src/ui/kit/esc_catcher.gd")
 ## The three sets of chess pieces as buttons (each with its two kings), the chosen one held down; picking one sets
 ## Settings "piece_set" and then calls `on_pick` (the set's key). `king_px`: the kings' height; without `names`,
 ## the kings alone (the names in the tooltips).
-static func piece_set_picker(king_px := 64.0, on_pick := Callable(), names := true) -> HBoxContainer:
-	var h := hbox(Pal.S2)
+static func piece_set_picker(king_px := 64.0, on_pick := Callable(), names := true, column := false) -> BoxContainer:
+	var h: BoxContainer = vbox(Pal.S2) if column else hbox(Pal.S2)
 	var g := ButtonGroup.new()
 	for s in [["", "Créatures"], ["classic", "Bonta / Brâkmar"], ["staunton", "Classiques"]]:
 		var key: String = s[0]
@@ -335,9 +335,20 @@ static func piece_set_picker(king_px := 64.0, on_pick := Callable(), names := tr
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.pressed.connect(func() -> void:
 			Settings.set_value("piece_set", key)
+			Settings.set_value("pieces_tip", false)  # the player knows how to change them now
 			if on_pick.is_valid():
 				on_pick.call(key))
+		b.set_meta("set", key)
 		h.add_child(b)
+	# another picker (or the settings) changed the set: this one shows it too
+	var follow := func(k: String) -> void:
+		if k == "piece_set" and is_instance_valid(h):
+			for c in h.get_children():
+				c.set_pressed_no_signal(String(c.get_meta("set")) == String(Settings.get_value("piece_set")))
+	Settings.changed.connect(follow)
+	h.tree_exiting.connect(func() -> void:
+		if Settings.changed.is_connected(follow):
+			Settings.changed.disconnect(follow))
 	return h
 
 

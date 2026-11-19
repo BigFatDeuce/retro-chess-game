@@ -21,7 +21,8 @@ for side, roles in data["sides"].items():
         if not f.exists():
             errors.append(f"{side}.{role} : sprite {p['gfx']} introuvable"); continue
         exports = set(S.SWF(str(f)).exports)
-        anims = {"static", "walk", "hit", "die", p.get("highlight", "static")}
+        # "die" may be missing (a crate does not die): the piece is knocked, then fades out
+        anims = {"static", "walk", "hit", p.get("highlight", "static")}
         for kind, a in p["attacks"].items():
             anims.add(a["anim"])
         for a in anims:
