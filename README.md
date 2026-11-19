@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <img src="media/summary.gif" alt="Retro Chess: the title screen, the champions' path, games on several boards, the Bonta against Brâkmar pieces and a victory" width="900">
+  <img src="media/summary.gif" alt="Retro Chess: the title screen, the champions' path, games on several boards with the creatures, the classic and the Bonta against Brâkmar pieces, and a victory" width="900">
 </p>
 
 ---
