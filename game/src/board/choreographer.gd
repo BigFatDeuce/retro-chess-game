@@ -98,6 +98,8 @@ func _wait_anim(p: Piece, cap := 5.0) -> void:
 
 ## Walks (or runs) a piece in a straight line across the board, keeping the perspective scale.
 func travel(p: Piece, to_uv: Vector2, run := false) -> void:
+	if not is_instance_valid(p):
+		return  # the game was left during the staging: its pieces are gone
 	var from_uv := _uv_of_piece(p)
 	var dist := from_uv.distance_to(to_uv)
 	if dist < 0.01:
@@ -140,6 +142,8 @@ func _steps_of(p: Piece, key: String) -> String:
 
 ## The knight's leap: a jump in an arc over the other pieces.
 func leap(p: Piece, to_uv: Vector2) -> void:
+	if not is_instance_valid(p):
+		return
 	var from_uv := _uv_of_piece(p)
 	Audio.play("game.leap", -3.0)
 	p.sprite.play_facing(p.move_anim(), screen_dir(from_uv, to_uv), false)
@@ -186,15 +190,18 @@ func play_move(info: Dictionary) -> void:
 		travel(rook, uv_of(info["rook_to"]))
 		await travel(mover, to_uv)
 		await _wait(0.15)
-		rook.square = info["rook_to"]
-		rook.idle()
+		# a game left during the staging has freed its pieces: whatever is gone is left alone from here on
+		if is_instance_valid(rook):
+			rook.square = info["rook_to"]
+			rook.idle()
 	elif info.get("knight"):
 		await leap(mover, to_uv)
 	else:
 		var d := _uv_of_piece(mover).distance_to(to_uv)
 		await travel(mover, to_uv, d > 2.5)
-	mover.square = info["to"]
-	mover.idle()
+	if is_instance_valid(mover):
+		mover.square = info["to"]
+		mover.idle()
 
 
 func _capture(att: Piece, vic: Piece, info: Dictionary) -> void:
@@ -213,25 +220,30 @@ func _capture(att: Piece, vic: Piece, info: Dictionary) -> void:
 	elif not ranged and info.get("knight"):
 		var stop := v_uv + (a_uv - v_uv).normalized() * APPROACH
 		await leap(att, stop)
+	if not is_instance_valid(att) or not is_instance_valid(vic):
+		return
 	a_uv = _uv_of_piece(att)
 	var dir := screen_dir(a_uv, v_uv)
 	vic.sprite.play_facing("static", -dir)
 	if mode == "charge":
 		await _charge(att, anim, v_uv, dir)
-		_victim_hit(vic, dir)
 	else:
 		att.sprite.play_facing(anim, dir)
 		var key := att.sprite.anim
 		if ranged and atk.get("fx") != null:
 			await _wait(_strike_time(att.sprite, key))
-			await _spell(att, vic, int(atk["fx"]), String(atk.get("mode", "")), a_uv, v_uv)
+			if is_instance_valid(att) and is_instance_valid(vic):
+				await _spell(att, vic, int(atk["fx"]), String(atk.get("mode", "")), a_uv, v_uv)
 		else:
 			await _wait_event(att.sprite, ["impact", "sound"], _strike_time(att.sprite, key))
-		_victim_hit(vic, dir)
+	if not is_instance_valid(att) or not is_instance_valid(vic):
+		return
+	_victim_hit(vic, dir)
 	await _wait_anim(att, 4.0)
 	await _wait(0.12)
 	# the attacker takes the square while the victim falls
-	await travel(att, uv_of(info["to"]))
+	if is_instance_valid(att):
+		await travel(att, uv_of(info["to"]))
 
 
 ## Estocade: the warrior lunges, closing the distance by the time the blade lands.
@@ -337,6 +349,9 @@ func _spell(att: Piece, vic: Piece, fx_id: int, mode: String, a_uv: Vector2, v_u
 				s.scale = Vector2.ONE * lerpf(board.scale_at(a_uv.y) * BoardView.PIECE_K, vs, k)
 				s.rotation += get_process_delta_time() * 9.0
 			s.rotation = 0.0
+			if not is_instance_valid(vic):
+				s.queue_free()
+				return
 			s.position = vic.position
 			s.z_index = 0
 			if not s.play("impact"):
@@ -360,16 +375,22 @@ func promote(old: Piece, new_piece: Piece) -> void:
 	old.sprite.flash = 1.0
 	Audio.play("game.promote")
 	await _wait(0.35)
+	if not is_instance_valid(old) or not is_instance_valid(new_piece):
+		return
 	var tw := create_tween().set_parallel()
 	tw.tween_property(old, "modulate:a", 0.0, 0.3 / speed)
 	tw.tween_property(new_piece, "modulate:a", 1.0, 0.3 / speed)
 	new_piece.sprite.flash = 1.0
 	await tw.finished
-	old.queue_free()
+	if is_instance_valid(old):
+		old.queue_free()
+	if not is_instance_valid(new_piece):
+		return
 	var hl2 := String(new_piece.def.get("highlight", ""))
 	if hl2 != "":
 		await new_piece.play_and_wait(hl2, new_piece.home_dir(), 3.0)
-	new_piece.idle()
+	if is_instance_valid(new_piece):
+		new_piece.idle()
 
 
 ## The king in check rears up (its highlight animation).
@@ -381,7 +402,8 @@ func check(king: Piece) -> void:
 	var hl := String(king.def.get("highlight", ""))
 	if hl != "":
 		await king.play_and_wait(hl, king.home_dir(), 3.0)
-	king.idle()
+	if is_instance_valid(king):
+		king.idle()
 
 
 ## Mate: the winning king triumphs, the mated king is struck down.
@@ -394,5 +416,7 @@ func mate(winner: Piece, loser: Piece) -> void:
 	if loser and enabled:
 		loser.sprite.flash = 1.0
 		await loser.play_and_wait("hit", loser.home_dir(), 1.5)
-		await loser.play_and_wait("die", loser.home_dir(), 3.0)
-		loser.sprite.stop_on_last()
+		if is_instance_valid(loser):
+			await loser.play_and_wait("die", loser.home_dir(), 3.0)
+		if is_instance_valid(loser):
+			loser.sprite.stop_on_last()

@@ -347,7 +347,8 @@ func _update_dialog() -> void:
 		v.add_child(Ui.para(notes, 1200, "Dim"))
 	var mb := int(Updater.info.get("size", 0)) / 1048576.0
 	var how := "Le jeu va se fermer, installer la mise à jour et se relancer tout seul." if OS.has_feature("windows") \
-		else "Le programme d'installation d'Android va s'ouvrir : confirme l'installation."
+		else "Le programme d'installation d'Android va s'ouvrir : confirme l'installation." if OS.has_feature("android") \
+		else "La page de téléchargement va s'ouvrir dans ton navigateur."
 	v.add_child(Ui.para(Lang.t(how) + ("  (%.0f Mo)" % mb if mb > 0 else ""), 1200, "Hud"))
 	var bar := ProgressBar.new()
 	bar.custom_minimum_size = Vector2(1200, 30)
@@ -389,6 +390,10 @@ func _update_dialog() -> void:
 		Updater.failed.disconnect(on_failed)
 		Updater.installing.disconnect(on_installing))
 	go.pressed.connect(func() -> void:
+		if not Updater.self_installs():
+			Updater.install()
+			close.call()
+			return
 		go.disabled = true
 		later.disabled = true
 		bar.visible = true

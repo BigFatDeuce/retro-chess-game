@@ -17,6 +17,8 @@ const REPO := "BigFatDeuce/retro-chess-game"
 const API := "https://api.github.com/repos/%s/releases/latest" % REPO
 const ASSET_WINDOWS := "RetroChess-windows.zip"
 const ASSET_ANDROID := "RetroChess-android.apk"
+const ASSET_LINUX := "RetroChess-linux.tar.gz"
+const ASSET_MACOS := "RetroChess-macos.zip"
 const DIR := "user://update"
 
 var info: Dictionary = {}  ## the newer release found, or {}
@@ -28,7 +30,22 @@ var _dl: HTTPRequest
 func supported() -> bool:
 	if OS.has_feature("web") or OS.has_feature("editor"):
 		return false
+	return OS.has_feature("windows") or OS.has_feature("android") or OS.has_feature("linuxbsd") 		or OS.has_feature("macos")
+
+
+## Whether the update is downloaded and installed by the game; elsewhere (Linux, macOS) the release page opens.
+func self_installs() -> bool:
 	return OS.has_feature("windows") or OS.has_feature("android")
+
+
+func _asset() -> String:
+	if OS.has_feature("android"):
+		return ASSET_ANDROID
+	if OS.has_feature("linuxbsd"):
+		return ASSET_LINUX
+	if OS.has_feature("macos"):
+		return ASSET_MACOS
+	return ASSET_WINDOWS
 
 
 func _ready() -> void:
@@ -77,7 +94,7 @@ func _on_checked(result: int, code: int, _headers: PackedStringArray, body: Pack
 	var tag := String(d.get("tag_name", ""))
 	if tag == "" or not newer(tag, version()):
 		return
-	var want := ASSET_ANDROID if OS.has_feature("android") else ASSET_WINDOWS
+	var want := _asset()
 	for a: Dictionary in d.get("assets", []):
 		if String(a.get("name", "")) == want:
 			info = {"version": tag.trim_prefix("v"), "notes": String(d.get("body", "")),
@@ -93,9 +110,12 @@ func _on_checked(result: int, code: int, _headers: PackedStringArray, body: Pack
 func install() -> void:
 	if info.is_empty() or busy:
 		return
+	if not self_installs():
+		OS.shell_open(String(info["page"]))
+		return
 	busy = true
 	DirAccess.make_dir_recursive_absolute(DIR)
-	var file := DIR.path_join(ASSET_ANDROID if OS.has_feature("android") else ASSET_WINDOWS)
+	var file := DIR.path_join(_asset())
 	_dl = HTTPRequest.new()
 	_dl.download_file = file
 	_dl.use_threads = true

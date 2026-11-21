@@ -12,6 +12,8 @@
   <a href="https://retro-chess.holy-c.men/"><img alt="Play in your browser" src="https://img.shields.io/badge/Play-in%20your%20browser-d9534f?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
   <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Windows" src="https://img.shields.io/badge/Download-Windows-e8a33c?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0wIDMuNCA5LjggMnY5LjVIMHpNMTEgMS44IDI0IDB2MTEuNUgxMXpNMCAxMi41aDkuOFYyMkwwIDIwLjZ6TTExIDEyLjVoMTNWMjRsLTEzLTEuOHoiLz48L3N2Zz4%3D"></a>
   <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Android" src="https://img.shields.io/badge/Download-Android-3ddc84?style=for-the-badge&logo=android&logoColor=white"></a>
+  <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for macOS" src="https://img.shields.io/badge/Download-macOS-999999?style=for-the-badge&logo=apple&logoColor=white"></a>
+  <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Linux" src="https://img.shields.io/badge/Download-Linux-f0c040?style=for-the-badge&logo=linux&logoColor=black"></a>
   <br>
   <img alt="Made with Godot" src="https://img.shields.io/badge/made%20with-Godot%204-478cbf?style=for-the-badge&logo=godotengine&logoColor=white">
 </p>
@@ -31,7 +33,7 @@
 - **The Champions' Path:** ten opponents, one per board, from a 600 Elo beginner to a 2000 Elo master, each with a character of their own.
 - **Opponents that look at the board:** the weak champions don't play random moves. They take a piece you leave and rarely give theirs away; they lose on plans, placement and tactics two moves deep. From 1350 Elo, Stockfish's own limited-strength mode takes over ([how it works](docs/HUMAN_AI.md)).
 - **Free play:** from the start, pick any board and any strength from 600 to 2800 Elo.
-- **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
+- **Online games:** create a game, share its six-letter code with a friend, and play at a distance (Windows, macOS, Linux, Android and browser together). No clock, rematches with colours swapped, and a dropped connection comes back on its own.
 - **Ten boards** with their own scenery, ambient life and music, from sunny meadows to frozen tundra.
 - **Animated armies:** the Bouftou Royal, the Tofu Royal and their friends against Brumaire, Jiva la Sage and the Pandawa Ivre. Every move is a walk, every capture a fight, and resting the mouse on a piece tells its name.
 - **Look closer:** zoom and pan around the board, hold the right mouse button and drag up to stand up and look down on it, or press the view button (V) to go from seated to leaning to standing, so no piece hides behind another.
@@ -47,12 +49,15 @@
 | **Browser** | Open [retro-chess.holy-c.men](https://retro-chess.holy-c.men/). Nothing to install; always the latest version. |
 | **Windows** | Download `RetroChess-windows.zip` from the [latest release](https://github.com/BigFatDeuce/retro-chess-game/releases/latest), unzip it into a folder and run `RetroChess.exe`. |
 | **Android** | Download `RetroChess-android.apk` on your phone and open it (allow installs from your browser when asked). Android 7 or later, 64-bit. |
+| **macOS** | Download `RetroChess-macos.zip`, unzip it and move `RetroChess.app` to Applications. The app is not notarized by Apple: the first time, right-click it and choose **Open** (or allow it in System Settings > Privacy & Security). macOS 11 or later, Intel or Apple Silicon. |
+| **Linux** | Download `RetroChess-linux.tar.gz`, extract it and run `./RetroChess.x86_64`. 64-bit x86, glibc 2.28 or later (most distributions since 2018). |
 
 ## 🔄 Updates
 
-The Windows and Android versions check this page at launch. When a new version is out, the title screen offers it:
-on Windows the game downloads it, closes, installs it and starts again by itself; on Android the system installer
-opens with the new version. The check can be turned off in the settings.
+The Windows, Android, macOS and Linux versions check this page at launch. When a new version is out, the title screen
+offers it: on Windows the game downloads it, closes, installs it and starts again by itself; on Android the system
+installer opens with the new version; on macOS and Linux the download page opens. The check can be turned off in the
+settings.
 
 ## 🧠 Source code
 

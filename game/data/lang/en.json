@@ -199,6 +199,7 @@
         "Version %s": "Version %s",
         "Le jeu va se fermer, installer la mise à jour et se relancer tout seul.": "The game will close, install the update and restart by itself.",
         "Le programme d'installation d'Android va s'ouvrir : confirme l'installation.": "Android's installer will open: confirm the installation.",
+        "La page de téléchargement va s'ouvrir dans ton navigateur.": "The download page will open in your browser.",
         "Plus tard": "Later",
         "Installer": "Install",
         "Téléchargement… %d %%": "Downloading… %d %%",
