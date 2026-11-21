@@ -14,7 +14,8 @@
   "leap": "saut",
   "land": "blop_step",
   "promote": "stars",
-  "castle": "rapid_swish"
+  "castle": "rapid_swish",
+  "defeat_gas": ["fart1", "fart2", "fart3", "fart4"]
  },
  "steps": {
   "small": ["step_little", "step_little2"],

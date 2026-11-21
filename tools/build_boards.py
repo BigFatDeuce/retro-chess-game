@@ -152,6 +152,52 @@ def scatter(b):
     return out
 
 
+# the game's view (BoardView): front-row square width, perspective, screen rows of the board, tilt
+VIEW_K, FRONT_Y, DEPTH_SPAN, CX, TILT_DEPTH = 0.035, 1330.0, 805.0, 1280.0, 0.5
+FRAME = 0.42  # frame width around the squares (BoardView.BORDER)
+PIECE_H = 1.5  # height of a standing piece, in squares of its row
+
+
+def hides_board(arr, org, d, density) -> bool:
+    """True when a standing object covers the board (squares and frame) or the pieces standing behind it, in any
+    view: seated or standing tilt, white or black side (the board is mirrored for black)."""
+    a = arr[..., 3] if arr.ndim == 3 else arr
+    step = max(1, max(a.shape) // 300)
+    ys, xs = np.nonzero(a[::step, ::step] > 60)
+    xs = xs * step - org[0]
+    ys = ys * step - org[1]
+    if d.get("flip"):
+        xs = -xs
+    v = float(d["v"])
+    s = 1 / (1 + VIEW_K * v)
+    k = s / density
+    area = (step * k) ** 2  # layout px² per sample
+    s8 = 1 / (1 + VIEW_K * 8)
+    for tilt in (0.0, 1.0):
+        c = DEPTH_SPAN * (1 + TILT_DEPTH * tilt) / (1 - s8)
+        hz = FRONT_Y - c
+        for u in (float(d["u"]), 8.0 - float(d["u"])):
+            px = CX + (u - 4) * SQUARE * s + xs * k
+            py = hz + c * s + ys * k
+            ss = (py - hz) / c
+            with np.errstate(divide="ignore", invalid="ignore"):
+                bv = (1 / ss - 1) / VIEW_K
+                bu = (px - CX) / (SQUARE * ss) + 4
+            on_board = (ss > 0) & (bu >= -FRAME) & (bu <= 8 + FRAME) & (bv >= -FRAME) & (bv <= 8 + FRAME)
+            on_pieces = np.zeros_like(on_board)
+            for r in range(8):
+                vr = r + 0.5
+                if vr <= v:  # pieces in front of the object are drawn over it
+                    continue
+                sr = 1 / (1 + VIEW_K * vr)
+                yf = hz + c * sr
+                half = (4 + FRAME) * SQUARE * sr
+                on_pieces |= (np.abs(px - CX) <= half) & (py <= yf) & (py >= yf - PIECE_H * SQUARE * sr)
+            if on_board.sum() * area > 150 or (on_pieces & ~on_board).sum() * area > 600:
+                return True
+    return False
+
+
 def average_colours(out, meta):
     """Mean colour of the squares, frame and ground (hex): the game draws soft lines in them along the board's
     slanted edges where the graphics have no edge smoothing (browser)."""
@@ -195,15 +241,20 @@ def job(args):
     bd.save(out / "border.png")
     meta["border"] = "border.png"
     seen = {}
+    rendered = {}
     for d in list(b.get("decor", [])) + scatter(b):
         sym = d["sym"]
         sc = float(d.get("scale", 1.0))
         k = f"{sym}@{sc}"
+        if k not in rendered:
+            rendered[k] = T.render_tile(sym, CHAR_SCALE * density * sc * float(b.get("decor_scale", 1.0)))
+        arr, org = rendered[k]
+        if arr is None:
+            print("  objet vide", sym)
+            continue
+        if not d.get("flat") and hides_board(arr, org, d, density):
+            continue  # it would stand over the board or the pieces
         if k not in seen:
-            arr, org = T.render_tile(sym, CHAR_SCALE * density * sc * float(b.get("decor_scale", 1.0)))
-            if arr is None:
-                print("  objet vide", sym)
-                continue
             fn = f"o_{sym}_{sc}.png"
             Image.fromarray(arr).save(out / fn)
             seen[k] = {"file": fn, "o": [round(float(org[0]), 1), round(float(org[1]), 1)]}

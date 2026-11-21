@@ -2,8 +2,8 @@
 
 - Sound effects: the MP3 data of the DefineSound tags of the library's effects.swf, copied unchanged to
   game/assets/gen/audio/sfx/<file>.mp3. Only what the game uses is copied: every `sound:<name>` cue found
-  in the baked piece / fx atlases, plus the sounds named in game/data/sounds.json (interface, steps,
-  ambience). A cue name is resolved through game/data/sfx_map.json (sound name -> effects file, from the
+  in the baked atlases (pieces, fx, critters, painted sets), plus the sounds named in game/data/sounds.json
+  (interface, steps, ambience, defeat). A cue name is resolved through game/data/sfx_map.json (sound name -> effects file, from the
   library's audio lang table), after lower-casing and turning spaces into underscores.
 - Music: the tracks of game/data/music.json (local music library), converted to Ogg Vorbis without
   metadata (ffmpeg) into game/assets/gen/audio/music/<id>.ogg. A track with an "intro" (a short jingle) starts
@@ -40,7 +40,8 @@ def resolve(name: str, smap: dict) -> str:
 
 def cues() -> set:
     found = set()
-    for d in ["pieces", "pieces_1x", "fx", "fx_1x"]:
+    for d in ["pieces", "pieces_1x", "fx", "fx_1x", "critters", "critters_1x", "classic", "classic_1x", "staunton",
+              "staunton_1x"]:
         for f in (GAME / "assets/gen" / d).glob("*.json"):
             a = json.loads(f.read_text(encoding="utf-8"))
             for anim in a.get("anims", {}).values():

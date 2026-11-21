@@ -22,68 +22,68 @@
  "tracks": {
   "ouverture": {
    "title": "Ouverture",
-   "source": "M:/Music/Ankama Games/Dofus/01 Dofus Ouverture.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/01 Dofus Ouverture.mp3"
   },
   "bonta": {
    "title": "Bonta",
-   "source": "M:/Music/Ankama Games/Dofus/10 Bonta.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/10 Bonta.mp3"
   },
   "foire": {
    "title": "La Foire",
-   "source": "M:/Music/Ankama Games/Dofus/22 La Foire Du Trool.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/22 La Foire Du Trool.mp3"
   },
   "amakna": {
    "title": "Amakna",
-   "source": "M:/Music/Ankama Games/Dofus/04 Amakna.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/04 Amakna.mp3"
   },
   "sadida": {
    "title": "Les Bottes",
-   "source": "M:/Music/Ankama Games/Dofus/23 Les Bottes De Sadida.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/23 Les Bottes De Sadida.mp3"
   },
   "moon": {
    "title": "L'île",
-   "source": "M:/Music/Ankama Games/Dofus/20 l'île De Moon.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/20 l'île De Moon.mp3"
   },
   "cania": {
    "title": "Les Plaines",
-   "source": "M:/Music/Ankama Games/Dofus/09 Les Plaines De Cania.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/09 Les Plaines De Cania.mp3"
   },
   "village": {
    "title": "Le Village",
-   "source": "M:/Music/Ankama Games/Dofus in Triple Time/03 Amakna Village, Where We Come Together.flac"
+   "source": "D:/Music/Ankama Games/Dofus in Triple Time/03 Amakna Village, Where We Come Together.flac"
   },
   "pandala": {
    "title": "La Forêt",
-   "source": "M:/Music/Ankama Games/Dofus/25 La Forêt De Pandala.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/25 La Forêt De Pandala.mp3"
   },
   "wabbits": {
    "title": "L'île des lapins",
-   "source": "M:/Music/Ankama Games/Dofus/21 L'île Des Wabbits.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/21 L'île Des Wabbits.mp3"
   },
   "sram": {
    "title": "L'ombre",
-   "source": "M:/Music/Ankama Games/Dofus/12 L'ombre De Sram.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/12 L'ombre De Sram.mp3"
   },
   "osamodas": {
    "title": "Le Fouet",
-   "source": "M:/Music/Ankama Games/Dofus/13 Le Fouet d'Osamodas.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/13 Le Fouet d'Osamodas.mp3"
   },
   "sidimote": {
    "title": "Les Landes",
-   "source": "M:/Music/Ankama Games/Dofus/14 Les Landes De Sidmote.mp3"
+   "source": "D:/Music/Ankama Games/Dofus/14 Les Landes De Sidmote.mp3"
   },
   "victoire": {
    "title": "En route pour l'aventure",
-   "source": "M:/Music/Ankama Games/Dofus 2 Original Soundtrack/01 En Route Pour L'aventure.flac",
-   "intro": "M:/Music/Ankama Games/Dofus 2 (Gamerip)/Track 36.mkv",
+   "source": "D:/Music/Ankama Games/Dofus 2 Original Soundtrack/01 En Route Pour L'aventure.flac",
+   "intro": "D:/Music/Ankama Games/Dofus 2 (Gamerip)/Track 36.mp3",
    "gap": 0.5,
    "fade_in": 2.0,
    "intro_db": 7
   },
   "defaite": {
    "title": "Un donjon, une mélancolie",
-   "source": "M:/Music/Ankama Games/Dofus Oscura Vol. 2/10 Un donjon, une mélancolie.flac",
-   "intro": "M:/Music/Ankama Games/Dofus 2 (Gamerip)/Track 37.mkv",
+   "source": "D:/Music/Ankama Games/Dofus Oscura Vol. 2/10 Un donjon, une mélancolie.flac",
+   "intro": "D:/Music/Ankama Games/Dofus 2 (Gamerip)/Track 37.mp3",
    "gap": 0.7,
    "fade_in": 2.5,
    "intro_db": 5

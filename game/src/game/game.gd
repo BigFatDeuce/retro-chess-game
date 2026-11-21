@@ -527,7 +527,10 @@ func _finish(res: int) -> void:
 	if res == ChessPosition.Result.CHECKMATE:
 		winner = 1 - pos.side
 		await choreo.mate(pieces.get(pos.king_sq[winner]), pieces.get(pos.king_sq[pos.side]))
-	Audio.music("victory" if winner == human_side or two_humans else "defeat")
+	if winner == human_side or two_humans:
+		Audio.music("victory")
+	else:
+		_defeat_audio()
 	game_over.emit({"result": res, "winner": winner, "human_won": winner == human_side,
 		"moves": san_moves.size()})
 
@@ -564,6 +567,14 @@ func resign() -> void:
 	ai.cancel()
 	over = true
 	board.input_enabled = false
-	Audio.music("defeat")
+	_defeat_audio()
 	game_over.emit({"result": -1, "winner": 1 - human_side, "human_won": false, "resigned": true,
 		"moves": san_moves.size()})
+
+
+## The defeat jingle; once in ten defeats, the "Lâcher les gaz" emote of Dofus Retro goes with it.
+func _defeat_audio() -> void:
+	Audio.music("defeat")
+	if randf() < 0.1:
+		await get_tree().create_timer(0.5).timeout
+		Audio.play("game.defeat_gas")
