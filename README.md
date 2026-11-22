@@ -50,7 +50,7 @@
 | **Windows** | Download `RetroChess-windows.zip` from the [latest release](https://github.com/BigFatDeuce/retro-chess-game/releases/latest), unzip it into a folder and run `RetroChess.exe`. |
 | **Android** | Download `RetroChess-android.apk` on your phone and open it (allow installs from your browser when asked). Android 7 or later, 64-bit. |
 | **macOS** | Download `RetroChess-macos.zip`, unzip it and move `RetroChess.app` to Applications. The app is not notarized by Apple: the first time, right-click it and choose **Open** (or allow it in System Settings > Privacy & Security). macOS 11 or later, Intel or Apple Silicon. |
-| **Linux** | Download `RetroChess-linux.tar.gz`, extract it and run `./RetroChess.x86_64`. 64-bit x86, glibc 2.28 or later (most distributions since 2018). |
+| **Linux** | Download `RetroChess-linux.tar.gz`, extract it and run `./RetroChess.x86_64`; `./install.sh` adds it, with its icon, to the applications menu. 64-bit x86, glibc 2.28 or later (most distributions since 2018). |
 
 ## 🔄 Updates
 
