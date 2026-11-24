@@ -16,6 +16,7 @@
   <a href="https://github.com/BigFatDeuce/retro-chess-game/releases/latest"><img alt="Download for Linux" src="https://img.shields.io/badge/Download-Linux-f0c040?style=for-the-badge&logo=linux&logoColor=black"></a>
   <br>
   <img alt="Made with Godot" src="https://img.shields.io/badge/made%20with-Godot%204-478cbf?style=for-the-badge&logo=godotengine&logoColor=white">
+  <a href="LICENSE"><img alt="Licence: GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0--or--later-a42e2b?style=for-the-badge"></a>
 </p>
 
 <p align="center">
@@ -61,8 +62,9 @@ settings.
 
 ## 🧠 Source code
 
-All of the game's code is here: the game itself (Godot 4, GDScript), the tools that build its pictures and sounds,
-the chess engine extension and the human-like opponents.
+All of the game's code is here: the game itself (Godot 4, GDScript) and its tests, the tools that build its pictures
+and sounds, the export and online-play server scripts (`tools/build/`), the chess engine extension and the human-like
+opponents.
 
 - **Human-like opponents:** [docs/HUMAN_AI.md](docs/HUMAN_AI.md) explains how they were made and measured, and how to
   reuse them with any UCI engine.
@@ -70,7 +72,7 @@ the chess engine extension and the human-like opponents.
   The tools in `tools/` rebuild them from a Dofus Retro install. The engine extension is built from
   [native/](native/README.md).
 
-## 📜 Credits and licence
+## 📜 Credits
 
 Retro Chess is a free fan game with no commercial aim, not affiliated with Ankama. Thank you to everyone whose work it
 stands on: **[CREDITS.md](CREDITS.md)**.
@@ -81,5 +83,9 @@ stands on: **[CREDITS.md](CREDITS.md)**.
   a reference.
 - Made with [Godot Engine](https://godotengine.org/) (MIT).
 
-The game's own code is under the **MIT licence**: reuse it freely, crediting "Retro Chess by BigFatDeuce" with a link
-to this page. Stockfish and the engine extension are GPLv3 ([LICENSE](LICENSE)).
+## ⚖️ Licence
+
+© 2026 BigFatDeuce. The code is free software under the **GPL-3.0-or-later** (see [LICENSE](LICENSE)).
+Third-party components keep their own licences: Stockfish (GPLv3), godot-cpp and Godot Engine (MIT), the Fredoka and
+Nunito fonts (OFL). The creatures, scenery, sounds and music belong to Ankama: they are not in this repository and not
+covered by its licence.

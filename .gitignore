@@ -9,6 +9,6 @@ native/bin/
 native/web/out/
 native/thirdparty/godot-cpp/
 tools/bin/
-build/
+/build/
 *.import
 __pycache__/

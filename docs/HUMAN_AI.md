@@ -2,8 +2,8 @@
 
 How Retro Chess makes opponents weaker than Stockfish's own weakest setting (UCI_Elo 1350) without making them silly,
 using any UCI engine. Above 1350 the game simply uses Stockfish's limited-strength mode (UCI_Elo). This page explains
-the idea, the method, the measurements and how to put it in your own project. The code is MIT (credit "Retro Chess by
-BigFatDeuce", see [LICENSE](../LICENSE)).
+the idea, the method, the measurements and how to put it in your own project. The code is free software under the
+GPL-3.0-or-later (see [LICENSE](../LICENSE)).
 
 ## The problem
 

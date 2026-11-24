@@ -1,0 +1,13 @@
+// Retro Chess sur Cloudflare : les fichiers de la version navigateur (build/web) et les salles du jeu en ligne
+// (worker.js : /api/host, /api/room/<CODE>, une salle = un Durable Object), domaine retro-chess.holy-c.men.
+// Publication : python tools/build/export_game.py deploy
+// Essai local : npx wrangler@4 dev -c tools/build/cloudflare/wrangler.jsonc --port 8787
+{
+  "name": "retro-chess",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "../../../build/web", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "durable_objects": { "bindings": [{ "name": "ROOMS", "class_name": "Room" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Room"] }],
+  "routes": [{ "pattern": "retro-chess.holy-c.men", "custom_domain": true }]
+}
